@@ -1,13 +1,16 @@
+import sys
 import xlrd
 import random
 
+# from xlrd.sheet import ctype_text
+
 class myExcel(object):
-    #filepath = ""
+    # filepath = ""
 
-    #def __init__(self):
-        #self.filepath = filepath
+    # def __init__(self):
+    # self.filepath = filepath
 
-    #print(filepath)
+    # print(filepath)
     filepath = "A:\Desktop\myProject\Project Files\Words.xlsx"
 
     workbook = xlrd.open_workbook(filepath)
@@ -15,21 +18,20 @@ class myExcel(object):
     sheet0 = workbook.sheet_by_name(sheet_names[0])
 
     row = sheet0.row(0)
-    from xlrd.sheet import ctype_text
 
     def getRandomItem(self, itemType, letter):
 
         while True:
-            randomNumber = random.randint(0,100)
-            #print(randomNumber)
+            randomNumber = random.randint(0, 100)
+            # print(randomNumber)
 
             try:
-                #name = xlsheet.getName(5, 'E')
+                # name = xlsheet.getName(5, 'E')
                 counter = 0
                 rowIndex = self.getRow(letter)
                 # print("letter row: ", letter, rowIndex)
                 for idx, cell in enumerate(self.row):
-                    # cell_type_str = ctype_text.get(cell.ctype, 'unknown type')
+                    # Counting the columns in that type of item
                     if (cell.value.startswith(itemType)):
                         counter = counter + 1
 
@@ -38,24 +40,27 @@ class myExcel(object):
                     if (cell.value.startswith(itemType)):
                         if (randomNumber == 0):
                             # this is the column
-                            name = self.sheet0.cell(rowIndex, idx)
-                            #print(name)
+                            info = str(self.sheet0.cell(rowIndex, idx))
+                            #print(info)
                             break
                         else:
                             randomNumber = randomNumber - 1
-            except:
-                print();
 
-            if name=="":
-                print("trying again")
-            else:
-                break;
+                if info =="text:''":
+                    print("trying again")
+                else:
+                    name = info[6:len(info)-1]#+info[:len(info)-1]
+                    #print(info)
+                    #print (name)
+                    break
 
+            except Exception:
+                print("Unexpected error: ",e = sys.exc_info()[0]);
 
         return name
 
     def getRow(self, character):
-        return{
+        return {
             'A': 1,
             'B': 2,
             'C': 3,
