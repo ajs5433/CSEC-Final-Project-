@@ -22,7 +22,6 @@ class myExcel(object):
     def getRandomItem(self, itemType, letter):
 
         while True:
-            randomNumber = random.randint(0, 100)
             # print(randomNumber)
 
             try:
@@ -35,6 +34,7 @@ class myExcel(object):
                     if (cell.value.startswith(itemType)):
                         counter = counter + 1
 
+                randomNumber = random.randint(0, counter*7)
                 randomNumber = randomNumber % counter
                 for idx, cell in enumerate(self.row):
                     if (cell.value.startswith(itemType)):
@@ -49,6 +49,44 @@ class myExcel(object):
                 if info =="text:''":
                     print("trying again")
                 else:
+                    name = info[6:len(info)-1]#+info[:len(info)-1]
+                    #print(info)
+                    #print (name)
+                    break
+
+            except Exception:
+                print("Unexpected error: ",e = sys.exc_info()[0]);
+
+        return name
+
+    def getRandomName(self, rowIndex):
+
+        while True:
+            randomNumber = random.randint(0,40)
+            # print(randomNumber)
+
+            try:
+                # name = xlsheet.getName(5, 'E')
+                counter = 0
+                # print("letter row: ", letter, rowIndex)
+                for idx, cell in enumerate(self.row):
+                    # Counting the columns in that type of item
+                    if (cell.value.startswith("Name")):
+                        counter = counter + 1
+
+                randomNumber = randomNumber % counter
+                for idx, cell in enumerate(self.row):
+                    if (cell.value.startswith("Name")):
+                        if (randomNumber == 0):
+                            # this is the column
+                            info = str(self.sheet0.cell(rowIndex, idx))
+                            #print(info)
+                            break
+                        else:
+                            randomNumber = randomNumber - 1
+
+                if (str(info) != "text:''" and str(info) != "empty:''"):
+                    #print(info)
                     name = info[6:len(info)-1]#+info[:len(info)-1]
                     #print(info)
                     #print (name)
