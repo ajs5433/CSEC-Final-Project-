@@ -63,7 +63,7 @@ class myExcel(object):
 
         while True:
             randomNumber = random.randint(0,40)
-            # print(randomNumber)
+            #print(randomNumber)
 
             try:
                 # name = xlsheet.getName(5, 'E')
