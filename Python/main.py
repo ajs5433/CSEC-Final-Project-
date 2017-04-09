@@ -1,8 +1,11 @@
 import sys
+sys.path.append("A:/Desktop/myProject/Python/UI forms")
 from myExcel import myExcel
 from myGUI import myGUI
 from PyQt4 import QtGui
-from char import Ui_characterWindow
+from charWindow import Ui_characterWindow
+from login import Ui_login
+from mainWindow import Ui_MainWindow
 
 xlsheet = myExcel()#"A:\Desktop\myProject\Project Files\Words.xlsx");
 
@@ -21,16 +24,8 @@ app.exec_()
 """
 
 app = QtGui.QApplication(sys.argv)
-characterWindow = QtGui.QWidget()
-ui = Ui_characterWindow()
-ui.setupUi(characterWindow)
-
-ui.btn_1.setToolTip(xlsheet.getRandomName(1) )
-ui.btn_2.setToolTip(  xlsheet.getRandomName(2) )
-ui.btn_3.setToolTip(xlsheet.getRandomName(3) )
-ui.btn_4.setToolTip( xlsheet.getRandomName(4) )
-
-
-characterWindow.show()
+login = QtGui.QWidget()
+ui = Ui_login()
+ui.setupUi(login)
+login.show()
 sys.exit(app.exec_())
-
