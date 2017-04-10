@@ -327,7 +327,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="btn_27">
+   <widget class="QPushButton" name="btn_20">
     <property name="geometry">
      <rect>
       <x>580</x>
@@ -425,16 +425,6 @@
      <string/>
     </property>
    </widget>
-   <widget class="QGraphicsView" name="graphicsView">
-    <property name="geometry">
-     <rect>
-      <x>690</x>
-      <y>130</y>
-      <width>151</width>
-      <height>151</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QLabel" name="password_label">
     <property name="geometry">
      <rect>
@@ -443,6 +433,13 @@
       <width>131</width>
       <height>21</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
     </property>
     <property name="text">
      <string/>
@@ -456,6 +453,32 @@
       <width>141</width>
       <height>31</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="picture_label">
+    <property name="geometry">
+     <rect>
+      <x>730</x>
+      <y>130</y>
+      <width>151</width>
+      <height>151</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">Background: rgb(255, 255, 255)</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::WinPanel</enum>
     </property>
     <property name="text">
      <string/>
