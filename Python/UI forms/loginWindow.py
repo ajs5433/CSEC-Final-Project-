@@ -75,13 +75,16 @@ class Ui_loginWindow(object):
         self.lastName_le.setGeometry(QtCore.QRect(300, 130, 113, 20))
         self.lastName_le.setObjectName(_fromUtf8("lastName_le"))
         self.password_le = QtGui.QLineEdit(loginWindow)
-        self.password_le.setGeometry(QtCore.QRect(280, 180, 131, 20))
+        self.password_le.setGeometry(QtCore.QRect(100, 180, 131, 20))
         self.password_le.setEchoMode(QtGui.QLineEdit.Password)
         self.password_le.setObjectName(_fromUtf8("password_le"))
         self.label_6 = QtGui.QLabel(loginWindow)
-        self.label_6.setGeometry(QtCore.QRect(170, 180, 81, 20))
+        self.label_6.setGeometry(QtCore.QRect(10, 180, 81, 20))
         self.label_6.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_6.setObjectName(_fromUtf8("label_6"))
+        self.showPassword_cb = QtGui.QCheckBox(loginWindow)
+        self.showPassword_cb.setGeometry(QtCore.QRect(300, 180, 101, 21))
+        self.showPassword_cb.setObjectName(_fromUtf8("showPassword_cb"))
 
         self.retranslateUi(loginWindow)
         QtCore.QMetaObject.connectSlotsByName(loginWindow)
@@ -102,6 +105,7 @@ class Ui_loginWindow(object):
         self.passwordType_cb.setItemText(6, _translate("loginWindow", "Slack", None))
         self.label_4.setText(_translate("loginWindow", "Welcome back!!", None))
         self.label_6.setText(_translate("loginWindow", "Password:", None))
+        self.showPassword_cb.setText(_translate("loginWindow", "Show Password", None))
 
 
 if __name__ == "__main__":
