@@ -13,6 +13,7 @@ from loginWindow import Ui_loginWindow
 from selectCharacterWindow import Ui_characterWindow
 from numberWindow import Ui_numberWindow
 from selectSymbolWindow import Ui_selectSymbol
+from myUser import createUser
 
 xlsheet = myExcel()
 imagesPath = "A:/Desktop/myProject/Project Files/Images/"
@@ -40,6 +41,7 @@ symbol_window = Ui_selectSymbol()
 
 class passwordGenerator(QtGui.QWidget):
     orderSelect = 0
+    current_user = createUser()
 
     def __init__(self):
         super(passwordGenerator, self).__init__()
@@ -63,6 +65,7 @@ class passwordGenerator(QtGui.QWidget):
         main_window.createNewPassword_btn.setObjectName("Normal Passwords")
         main_window.createNewPassword_btn_2.setObjectName("Medium Passwords")
         MainWindow.show()
+        self.current_user = createUser()
         #createUserWindow.show()
         #loginWindow.show()
         sys.exit(app.exec_())
