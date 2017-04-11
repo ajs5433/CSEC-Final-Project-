@@ -9,15 +9,15 @@ class myExcel(object):
 
     # def __init__(self):
     # self.filepath = filepath
-
+    maxCharacters = 47
     # print(filepath)
     filepath = "A:\Desktop\myProject\Project Files\Words.xlsx"
 
     workbook = xlrd.open_workbook(filepath)
     sheet_names = workbook.sheet_names()
     sheet0 = workbook.sheet_by_name(sheet_names[0])
-
     row = sheet0.row(0)
+    suggestion = ""
 
     def getRandomItem(self, itemType, letter):
 
@@ -56,6 +56,25 @@ class myExcel(object):
 
             except Exception:
                 print("Unexpected error: ",e = sys.exc_info()[0]);
+
+        return name
+
+    def getRandomSymbol(self):
+        #Character Icon
+        randomNumber = random.randint(2, self.maxCharacters)
+        for idx, cell in enumerate(self.row):
+            if (cell.value.startswith("Character Icon")):
+                #print(randomNumber, idx)
+                myCol = idx
+
+        info = str(self.sheet0.cell(randomNumber, myCol))
+        name = info[6:len(info) - 1]  # +info[:len(info)-1]
+        mySug = str(self.sheet0.cell(randomNumber, (myCol - 2)))  # The characters are 2 columns to the left
+        #mySug = mySug[6:len(info) - 1]
+        #mySug = mySug[len(info)]
+        #self.suggestion = mySug
+        self.suggestion= mySug[6:(len(info) - 1):]
+        print(self.suggestion)
 
         return name
 
@@ -126,12 +145,6 @@ class myExcel(object):
             'Y': 25,
             'Z': 26,
         }[character]
-
-
-
-
-
-
 
 
 

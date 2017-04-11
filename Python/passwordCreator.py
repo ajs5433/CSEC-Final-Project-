@@ -11,24 +11,32 @@ from mainWindow import Ui_MainWindow
 from createUserWindow import Ui_createUserWindow
 from loginWindow import Ui_loginWindow
 from selectCharacterWindow import Ui_characterWindow
+from numberWindow import Ui_numberWindow
+from selectSymbolWindow import Ui_selectSymbol
 
 xlsheet = myExcel()
 imagesPath = "A:/Desktop/myProject/Project Files/Images/"
+symbolsPath = "A:/Desktop/myProject/Project Files/Symbols/"
 buttonName = ""
 
 myList = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26]
-order = ['PAO1', 'PAO2', 'Number', 'Symbol']
+order_normal_mode = ['PAO1', 'Number', 'Symbol']
+order_medium_mode = ['PAO1', 'PAO2', 'Number', 'Symbol']
 
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
-createUserWindow = QtGui.QWidget()
 loginWindow = QtGui.QWidget()
+createUserWindow = QtGui.QWidget()
 characterWindow = QtGui.QWidget()
+numberWindow = QtGui.QWidget()
+symbolWindow = QtGui.QWidget()
 
 main_window = Ui_MainWindow()
 create_user_window = Ui_createUserWindow()
 login_window = Ui_loginWindow()
 select_character_window = Ui_characterWindow()
+number_window = Ui_numberWindow()
+symbol_window = Ui_selectSymbol()
 
 class passwordGenerator(QtGui.QWidget):
     orderSelect = 0
@@ -39,12 +47,21 @@ class passwordGenerator(QtGui.QWidget):
         create_user_window.setupUi(createUserWindow)
         login_window.setupUi(loginWindow)
         select_character_window.setupUi(characterWindow)
+        number_window.setupUi(numberWindow)
+        symbol_window.setupUi(symbolWindow)
+        symbol_window.pushButton_2.clicked.connect(self.setupSymbolWindow)
 
     def openWindow(self):
-        random.shuffle(order)
-        order.insert(len(order), 'complete')
-        main_window.pushButton.clicked.connect(self.nextStep_event) #createNewUser_btn
-        main_window.pushButton_2.clicked.connect(self.confirmPasswordCreated_event)  # confirmPasswordCreated_btn
+        random.shuffle(order_normal_mode)
+        random.shuffle(order_medium_mode)
+        order_normal_mode.insert(len(order_normal_mode), 'complete')
+        order_medium_mode.insert(len(order_medium_mode), 'complete')
+        main_window.createNewPassword_btn.clicked.connect(self.nextStep_event) #Normal
+        main_window.createNewPassword_btn_2.clicked.connect(self.nextStep_event)  # Normal
+        #main_window.createNewPassword_btn_2.connect(self.nextStep_event)  #Medium
+        #main_window.confirmPasswordCreated_btn.connect(self.confirmPasswordCreated_event)  # Check password
+        main_window.createNewPassword_btn.setObjectName("Normal Passwords")
+        main_window.createNewPassword_btn_2.setObjectName("Medium Passwords")
         MainWindow.show()
         #createUserWindow.show()
         #loginWindow.show()
@@ -107,35 +124,71 @@ class passwordGenerator(QtGui.QWidget):
         scene.addPixmap(QtGui.QPixmap(imagesPath+name+".jpg"))
         scene.setSceneRect(QtCore.QRectF(0,0,2,2))
         select_character_window.graphicsView.setScene(scene)
-        """
+        
         #find a better way for the picture!
         pixmap = QtGui.QPixmap(imagesPath+name+".jpg")
         select_character_window.picture_label.setPixmap(pixmap)#QtGui.QPixmap(imagesPath+name+".jpg"))
+        """
+        myIconSize = QtCore.QSize(151, 151)
+        myIcon = QtGui.QIcon()
+        myIcon.addPixmap(QtGui.QPixmap(imagesPath + name + ".jpg"))
+        select_character_window.pushButton.setIcon(myIcon)
+        select_character_window.pushButton.setIconSize(myIconSize)
 
     def nextStep_event(self):
-        print(order[self.orderSelect])
+        pushedBy = self.sender().objectName()
+        #print("pushed by "+pushedBy)
+        if (pushedBy == "Normal Passwords"):
+            myOrder = order_normal_mode
+        elif(pushedBy=="Medium Passwords"):
+            myOrder = order_medium_mode
 
-        if (order[self.orderSelect]=='complete'):
+        print(myOrder[self.orderSelect])
+
+        if (myOrder[self.orderSelect]=='complete'):
             self.orderSelect = 0
 
-        elif(order[self.orderSelect]=='PAO1'):
+        elif(myOrder[self.orderSelect]=='PAO1'):
             self.orderSelect+=1
             self.setupCharacterWindow()
             #MainWindow.close()
+            symbolWindow.close()
+            numberWindow.close()
             characterWindow.show()
-        elif(order[self.orderSelect]=='PAO2'):
+        elif(myOrder[self.orderSelect]=='PAO2'):
             self.orderSelect += 1
             self.setupCharacterWindow()
             #MainWindow.close()
+            symbolWindow.close()
+            numberWindow.close()
             characterWindow.show()
-        elif(order[self.orderSelect]=='Number'):
+        elif(myOrder[self.orderSelect]=='Number'):
             self.orderSelect += 1
+            symbolWindow.close()
+            characterWindow.close()
+            numberWindow.show()
         else:
             self.orderSelect+=1
+            characterWindow.close()
+            numberWindow.close()
+            self.setupSymbolWindow()
+            symbolWindow.show()
 
 
     def confirmPasswordCreated_event(self):
         loginWindow.show()
+
+    def setupSymbolWindow(self):
+        mySymbol = xlsheet.getRandomSymbol()
+        myIconSize = QtCore.QSize(101, 101)
+        myIcon = QtGui.QIcon()
+        myIcon.addPixmap(QtGui.QPixmap(symbolsPath + mySymbol + ".jpg"))
+        symbol_window.image.setIcon(myIcon)
+        symbol_window.image.setIconSize(myIconSize)
+        symbol_window.symbolName_label.setText(mySymbol)
+        symbol_window.label_4.setText(xlsheet.suggestion)
+        print(mySymbol)
+
 
 if __name__ == "__main__":
     myApp = passwordGenerator()
