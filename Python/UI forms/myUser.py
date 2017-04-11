@@ -2,7 +2,7 @@ import datetime
 import time
 import json
 import os
-
+from datetime import datetime
 
 filepath = 'A:/Desktop/myProject/Project Files/userBook.txt'
 
@@ -97,6 +97,9 @@ class createUser():
 
             with open('my_file.json', 'w') as f:
                 f.write(json.dumps(json_data))
+
+    def addToPassword(self, moredata):
+        self.password = self.password + moredata
 
 if __name__== "__main__":
     myuser = createUser("gotta", "Go888", "Test")
