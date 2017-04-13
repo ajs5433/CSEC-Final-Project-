@@ -39,7 +39,7 @@ class Ui_selectSymbol(object):
         self.pushButton_2.setGeometry(QtCore.QRect(30, 150, 121, 21))
         self.pushButton_2.setObjectName(_fromUtf8("pushButton_2"))
         self.symbolName_label = QtGui.QLabel(self.frame)
-        self.symbolName_label.setGeometry(QtCore.QRect(30, 10, 121, 20))
+        self.symbolName_label.setGeometry(QtCore.QRect(10, 10, 161, 20))
         font = QtGui.QFont()
         font.setFamily(_fromUtf8("Century Gothic"))
         font.setPointSize(12)

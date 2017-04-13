@@ -25,9 +25,9 @@ except AttributeError:
 class Ui_numberWindow(object):
     def setupUi(self, numberWindow):
         numberWindow.setObjectName(_fromUtf8("numberWindow"))
-        numberWindow.resize(607, 219)
+        numberWindow.resize(607, 251)
         self.next_btn = QtGui.QPushButton(numberWindow)
-        self.next_btn.setGeometry(QtCore.QRect(480, 150, 81, 31))
+        self.next_btn.setGeometry(QtCore.QRect(490, 190, 81, 31))
         self.next_btn.setObjectName(_fromUtf8("next_btn"))
         self.number1_label = QtGui.QLabel(numberWindow)
         self.number1_label.setGeometry(QtCore.QRect(40, 50, 81, 71))
@@ -64,10 +64,11 @@ class Ui_numberWindow(object):
         font.setBold(True)
         font.setWeight(75)
         self.equal_label.setFont(font)
+        self.equal_label.setText(_fromUtf8(""))
         self.equal_label.setAlignment(QtCore.Qt.AlignCenter)
         self.equal_label.setObjectName(_fromUtf8("equal_label"))
         self.result_label = QtGui.QLabel(numberWindow)
-        self.result_label.setGeometry(QtCore.QRect(400, 50, 121, 71))
+        self.result_label.setGeometry(QtCore.QRect(400, 50, 171, 71))
         font = QtGui.QFont()
         font.setPointSize(48)
         font.setBold(True)
@@ -76,6 +77,16 @@ class Ui_numberWindow(object):
         self.result_label.setText(_fromUtf8(""))
         self.result_label.setAlignment(QtCore.Qt.AlignCenter)
         self.result_label.setObjectName(_fromUtf8("result_label"))
+        self.wholenumber_le = QtGui.QLineEdit(numberWindow)
+        self.wholenumber_le.setGeometry(QtCore.QRect(360, 190, 113, 31))
+        self.wholenumber_le.setObjectName(_fromUtf8("wholenumber_le"))
+        self.label = QtGui.QLabel(numberWindow)
+        self.label.setGeometry(QtCore.QRect(70, 200, 281, 20))
+        font = QtGui.QFont()
+        font.setFamily(_fromUtf8("Century Gothic"))
+        font.setPointSize(10)
+        self.label.setFont(font)
+        self.label.setObjectName(_fromUtf8("label"))
 
         self.retranslateUi(numberWindow)
         QtCore.QMetaObject.connectSlotsByName(numberWindow)
@@ -85,7 +96,7 @@ class Ui_numberWindow(object):
         self.next_btn.setText(_translate("numberWindow", "Next", None))
         self.number1_label.setText(_translate("numberWindow", "8", None))
         self.number2_label.setText(_translate("numberWindow", "8", None))
-        self.equal_label.setText(_translate("numberWindow", "=", None))
+        self.label.setText(_translate("numberWindow", "Write your whole generated pin number:", None))
 
 
 if __name__ == "__main__":

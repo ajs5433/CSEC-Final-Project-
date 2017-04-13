@@ -25,7 +25,7 @@ except AttributeError:
 class Ui_createUserWindow(object):
     def setupUi(self, createUserWindow):
         createUserWindow.setObjectName(_fromUtf8("createUserWindow"))
-        createUserWindow.resize(267, 365)
+        createUserWindow.resize(267, 363)
         self.ok_btn = QtGui.QPushButton(createUserWindow)
         self.ok_btn.setGeometry(QtCore.QRect(180, 310, 41, 23))
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
@@ -49,6 +49,7 @@ class Ui_createUserWindow(object):
         self.passwordType_cb = QtGui.QComboBox(createUserWindow)
         self.passwordType_cb.setGeometry(QtCore.QRect(110, 240, 121, 22))
         self.passwordType_cb.setObjectName(_fromUtf8("passwordType_cb"))
+        self.passwordType_cb.addItem(_fromUtf8(""))
         self.passwordType_cb.addItem(_fromUtf8(""))
         self.passwordType_cb.addItem(_fromUtf8(""))
         self.passwordType_cb.addItem(_fromUtf8(""))
@@ -97,6 +98,7 @@ class Ui_createUserWindow(object):
         self.label.setText(_translate("createUserWindow", "Name:", None))
         self.label_2.setText(_translate("createUserWindow", "Last Name:", None))
         self.label_3.setText(_translate("createUserWindow", "Password Type:", None))
+        self.passwordType_cb.setToolTip(_translate("createUserWindow", "<html><head/><body><p>Please <span style=\" font-weight:600;\">DO NOT</span> select <span style=\" font-style:italic;\">&lt;Not this one&gt;. </span>This was created to test the application ONLY and the results will not be considered.</p></body></html>", None))
         self.passwordType_cb.setItemText(0, _translate("createUserWindow", "-set password type-", None))
         self.passwordType_cb.setItemText(1, _translate("createUserWindow", "Testing Password 1", None))
         self.passwordType_cb.setItemText(2, _translate("createUserWindow", "Testing Password 2", None))
@@ -104,6 +106,7 @@ class Ui_createUserWindow(object):
         self.passwordType_cb.setItemText(4, _translate("createUserWindow", "Gmail", None))
         self.passwordType_cb.setItemText(5, _translate("createUserWindow", "Facebook", None))
         self.passwordType_cb.setItemText(6, _translate("createUserWindow", "Slack", None))
+        self.passwordType_cb.setItemText(7, _translate("createUserWindow", "<Not this one>", None))
         self.label_4.setText(_translate("createUserWindow", "Welcome", None))
         self.label_5.setText(_translate("createUserWindow", "Welcome", None))
 
