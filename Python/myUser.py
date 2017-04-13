@@ -2,6 +2,7 @@ import datetime
 import time
 import json
 import os
+from myUser import createUser
 from datetime import datetime
 
 filepath = 'A:/Desktop/myProject/Project Files/userBook.txt'
@@ -18,15 +19,21 @@ class createUser():
 
     PAO1_person = ""
     PAO1_action = ""
+    PAO1_number = ""
     PAO1_object = ""
     PAO1_full = ""
 
     PAO2_person = ""
     PAO2_action = ""
     PAO2_object = ""
+    PAO2_place =""
     PAO2_full = ""
 
-    number = ""
+    number_1 = ""
+    number_2 = ""
+    number_result =""
+    number_full = ""
+
     symbol = ""
 
     setup_time = ""

@@ -116,6 +116,41 @@ class myExcel(object):
 
         return name
 
+    def getRandomNumber(self, user):
+        flag = True;
+
+        while(flag):
+            operation = random.randint(1,5)
+
+            if (operation == 1):        #Sum
+                number1 = random.randint(0,9)
+                number2 = random.randint(0,9)
+                result = number1 +number2
+            elif(operation == 2):       #Rest
+                number1 = random.randint(0, 9)
+                number2 = random.randint(0, 9)
+                result = number1 - number2
+            elif(operation==3):         #Mult
+                number1 = random.randint(0, 9)
+                number2 = random.randint(0, 9)
+                result = number1 * number2
+            elif(operation == 4):
+                while(True):
+                    number1 = random.randint(0, 9)
+                    number2 = random.randint(0, 9)
+
+                    try:
+                        result = number1 / number2
+                    except:
+                        result = 1
+
+                    if((result ==0) and (number1>number2)):
+                        continue;
+            user.number_1 = number1
+            user.number_2 = number2
+            user.number_result = result
+            user.number_full = ""+number1+""+number2+""+result;
+
     def getRow(self, character):
         return {
             'A': 1,
