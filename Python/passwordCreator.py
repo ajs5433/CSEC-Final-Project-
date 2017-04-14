@@ -4,6 +4,7 @@ import random
 from PyQt4 import QtGui
 from PyQt4 import QtCore
 from PyQt4.QtCore import QObject
+import time
 
 from myExcel import myExcel
 sys.path.append("A:/Desktop/myProject/Python/UI forms")
@@ -296,9 +297,17 @@ class passwordGenerator(QtGui.QWidget):
             selectCharacterWindow.show()
         elif(self.myOrder[self.orderSelect]=='Number'):
             self.orderSelect += 1
-            xlsheet.getRandomNumber(self.current_user)
+            xlsheet.getRandomNumber()
+            self.current_user.number_1 = xlsheet.n1
+            self.current_user.number_2 = xlsheet.n2
+            self.current_user.number_result = xlsheet.r
+            self.current_user.operation= xlsheet.o
+            self.current_user.number_full= xlsheet.fn
+            fn = xlsheet.fn
+            self.current_user.addToPassword(fn)
             myString = ("Your numbers are " + str(self.current_user.number_1)+ " and " +str(self.current_user.number_2)+ " you will need to " +str(self.current_user.operation)+" them.")
             calculate_numbers.label_2.setText(myString)
+            calculate_numbers.ok_btn.clicked.connect(self.numbers2)
             calculateNumbers.show()
         else:
             self.orderSelect+=1
@@ -319,6 +328,116 @@ class passwordGenerator(QtGui.QWidget):
         select_symbol_window.label_4.setText(xlsheet.suggestion)
         print(mySymbol)
 
+    def numbers2(self):
+
+        if (str(calculate_numbers.number1_le.text()) != str(self.current_user.number_1)):
+            print(
+                "The value that you have is {} you are supposed to have {}".format(calculate_numbers.number1_le.text(),
+                                                                                   str(self.current_user.number_1)))
+        elif (str(calculate_numbers.number2_le.text()) != str(self.current_user.number_2)):
+            print(
+                "The value that you have is {} you are supposed to have {}".format(calculate_numbers.number2_le.text(),
+                                                                                   str(self.current_user.number_2)))
+        elif (str(calculate_numbers.results_le.text()) != str(self.current_user.number_result)):
+            print("The value that you have is {} you are supposed to have {}".format(calculate_numbers.results_le.text(),str(self.current_user.number_results)))
+
+        else:#(str(calculate_numbers.number1_le.text())==self.current_user.number_1 and\
+              #         str(calculate_numbers.number2_le.text())==self.current_user.number_2 and\
+               #        str(calculate_numbers.results_le.text())==self.current_user.number_result):
+            operation = self.current_user.operation
+            myOperationLabel =""
+            if(operation=="add"):
+                myOperationLabel = "+"
+            elif (operation == "substract"):
+                myOperationLabel = "-"
+            elif (operation == "multiply"):
+                myOperationLabel = "x"
+            elif (operation == "divide"):
+                myOperationLabel = "/"
+
+            number_window.number1_label.setText(str(self.current_user.number_1))
+            number_window.number2_label.setText(str(self.current_user.number_2))
+            number_window.operation_label.setText(myOperationLabel)
+            number_window.equal_label.setText("=")
+            number_window.result_label.setText(str(self.current_user.number_result))
+            number_window.next_btn.clicked.connect(self.gotokeypad)
+            calculateNumbers.close()
+            numberWindow.show()
+
+
+
+    def gotokeypad(self):
+        if(str(number_window.wholenumber_le.text())==str(self.current_user.number_full)):
+            self.inkeypad()
+        else:
+            print("you need {} and you are typing {}".format(str(number_window.wholenumber_le.text()), str(self.current_user.number_results)))
+
+    def inkeypad(self):
+        #keypad_window.next_btn.clicked.connect(self.donothing)
+        numberWindow.close()
+        KeyPad.show()
+        fullNumberString = str(self.current_user.number_full)
+        for c in fullNumberString:
+            self.shine(c)
+        keypad_window.next_btn.clicked.connect(self.keypadclick)
+
+    def donothing(self):
+        print ("Have to wait for keypad")
+
+    def keypadclick(self):
+        fullNumberString = str(self.current_user.number_full)
+        if(keypad_window.number_le.text()==fullNumberString):
+            for c in fullNumberString:
+                self.shine(c)
+            self.nextStep_event()
+
+
+    def shine(self, number):
+        if(number =='1'):
+            keypad_window.btn_1.setStyleSheet("Background: rgb(220, 255, 60)")
+            time.sleep(1)
+            keypad_window.btn_1.setStyleSheet("")
+        elif (number == '2'):
+            keypad_window.btn_2.setStyleSheet("Background: rgb(220, 255, 60)")
+            time.sleep(1)
+            keypad_window.btn_2.setStyleSheet("")
+        elif (number == '3'):
+            keypad_window.btn_3.setStyleSheet("Background: rgb(220, 255, 60)")
+            time.sleep(1)
+            keypad_window.btn_3.setStyleSheet("")
+        elif (number == '4'):
+            keypad_window.btn_4.setStyleSheet("Background: rgb(220, 255, 60)")
+            time.sleep(1)
+            keypad_window.btn_4.setStyleSheet("")
+        elif (number == '5'):
+            keypad_window.btn_5.setStyleSheet("Background: rgb(220, 255, 60)")
+            time.sleep(1)
+            keypad_window.btn_5.setStyleSheet("")
+        elif (number == '6'):
+            keypad_window.btn_6.setStyleSheet("Background: rgb(220, 255, 60)")
+            time.sleep(1)
+            keypad_window.btn_6.setStyleSheet("")
+        elif (number == '7'):
+            keypad_window.btn_7.setStyleSheet("Background: rgb(220, 255, 60)")
+            time.sleep(1)
+            keypad_window.btn_7.setStyleSheet("")
+        elif (number == '8'):
+            keypad_window.btn_8.setStyleSheet("Background: rgb(220, 255, 60)")
+            time.sleep(1)
+            keypad_window.btn_8.setStyleSheet("")
+        elif (number == "9"):
+            keypad_window.btn_9.setStyleSheet("Background: rgb(220, 255, 60)")
+            time.sleep(1)
+            keypad_window.btn_9.setStyleSheet("")
+        elif (number == "0"):
+            keypad_window.btn_0.setStyleSheet("Background: rgb(220, 255, 60)")
+            time.sleep(1)
+            keypad_window.btn_0.setStyleSheet("")
+        elif (number == "-"):
+            keypad_window.btn_minus.setStyleSheet("Background: rgb(220, 255, 60)")
+            time.sleep(1)
+            keypad_window.btn_minus.setStyleSheet("")
+
     def saveSymbol(self):
         if(select_symbol_window.lineEdit.text()!=""):
             symbolString = select_symbol_window.lineEdit.text()
@@ -330,41 +449,42 @@ class passwordGenerator(QtGui.QWidget):
         myDialog.close()
 
     def characterSelected(self):
-        pushedBy = pushedBy = self.sender().objectName()
-        print("character selected")
-        nameR = select_character_window.password_label.text()
-        myName = select_character_window.name_label.text()
-        myAction = xlsheet.getRandomItem("Action")
-        myObject = xlsheet.getRandomItem("Object")
-        myIconSize = QtCore.QSize(81, 81)
+        if(select_character_window.password_label.text()!="" and select_character_window.password_label.text()!= ""):
+            pushedBy = self.sender().objectName()
+            print("character selected")
+            nameR = select_character_window.password_label.text()
+            myName = select_character_window.name_label.text()
+            myAction = xlsheet.getRandomItem("Action")
+            myObject = xlsheet.getRandomItem("Object")
+            myIconSize = QtCore.QSize(81, 81)
 
-        #select_character_window_2.name_label.setText(myName)
-        select_character_window_2.action_label.setText(myAction)
-        select_character_window_2.object_label.setText(myObject)
-        myIcon = QtGui.QIcon()
-        myIcon.addPixmap(QtGui.QPixmap(imagesPath + myName + ".jpg"))
-        select_character_window_2.pushButton.setIcon(myIcon)
-        select_character_window_2.pushButton.setIconSize(myIconSize)
-        select_character_window_2.pushButton.setToolTip(myName)
-        psswString = nameR + myAction[0]+myObject[0]
+            #select_character_window_2.name_label.setText(myName)
+            select_character_window_2.action_label.setText(myAction)
+            select_character_window_2.object_label.setText(myObject)
+            myIcon = QtGui.QIcon()
+            myIcon.addPixmap(QtGui.QPixmap(imagesPath + myName + ".jpg"))
+            select_character_window_2.pushButton.setIcon(myIcon)
+            select_character_window_2.pushButton.setIconSize(myIconSize)
+            select_character_window_2.pushButton.setToolTip(myName)
+            psswString = nameR + myAction[0]+myObject[0]
 
-        if(pushedBy== "PAO1"):
-            print("PAO1")
-            self.current_user.PAO1_person = myName
-            self.current_user.PAO1_object = myObject
-            self.current_user.PAO1_action = myAction
-            self.current_user.PAO1_full = psswString
-            selectCharacterWindow.close()
-        elif (pushedBy == "PAO2"):
-            print("PAO2")
-            self.current_user.PAO2_person = myName
-            self.current_user.PAO2_object = myObject
-            self.current_user.PAO2_action = myAction
-            self.current_user.PAO2_full = psswString
-            PAO2selectCharacterWindow.close()
-        self.current_user.addToPassword(psswString)
+            if(pushedBy== "PAO1"):
+                print("PAO1")
+                self.current_user.PAO1_person = myName
+                self.current_user.PAO1_object = myObject
+                self.current_user.PAO1_action = myAction
+                self.current_user.PAO1_full = psswString
+                selectCharacterWindow.close()
+            elif (pushedBy == "PAO2"):
+                print("PAO2")
+                self.current_user.PAO2_person = myName
+                self.current_user.PAO2_object = myObject
+                self.current_user.PAO2_action = myAction
+                self.current_user.PAO2_full = psswString
+                PAO2selectCharacterWindow.close()
+            self.current_user.addToPassword(psswString)
 
-        selectCharacterWindow2.show()
+            selectCharacterWindow2.show()
 
 
 if __name__ == "__main__":

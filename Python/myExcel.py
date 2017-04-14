@@ -8,6 +8,12 @@ from myUser import createUser
 class myExcel(object):
     # filepath = ""
 
+    n1 = ""
+    n2 = ""
+    o = ""
+    r = ""
+    fn = ""
+
     # def __init__(self):
     # self.filepath = filepath
     maxCharacters = 47
@@ -68,7 +74,8 @@ class myExcel(object):
             try:
                 # name = xlsheet.getName(5, 'E')
                 counter = 0
-                rowIndex = random.randint(2,27)
+                rowIndex = random.randint(1,26)
+                #print(rowIndex)
                 # print("letter row: ", letter, rowIndex)
                 for idx, cell in enumerate(self.row):
                     # Counting the columns in that type of item
@@ -157,7 +164,7 @@ class myExcel(object):
 
         return name
 
-    def getRandomNumber(self, user):
+    def getRandomNumber(self):#, user):
         flag = True;
 
         while(flag):
@@ -166,28 +173,28 @@ class myExcel(object):
 
             if (operation == 1):        #Sum
                 print("sum")
-                user.operation = "add"
+                self.o = "add"
                 number1 = random.randint(0,9)
                 number2 = random.randint(0,9)
                 result = number1 +number2
                 flag = False;
             elif(operation == 2):       #Rest
                 print("r")
-                user.operation = "substract"
+                self.o= "substract"
                 number1 = random.randint(0, 9)
                 number2 = random.randint(0, 9)
                 result = number1 - number2
                 flag = False;
             elif(operation==3):         #Mult
                 print("m")
-                user.operation = "multiply"
+                self.o= "multiply"
                 number1 = random.randint(0, 9)
                 number2 = random.randint(0, 9)
                 result = number1 * number2
                 flag = False;
             elif(operation == 4):
                 print("d")
-                user.operation = "divide"
+                self.o= "divide"
                 while(result!=0):
                     number1 = random.randint(0, 9)
                     number2 = random.randint(0, 9)
@@ -204,13 +211,10 @@ class myExcel(object):
             else:
                 user.operation = "exponentiation"
 
-        user.number_1 = number1
-        user.number_2 = number2
-        user.number_result = result
-        fullnumber =str(number1)+str(number2)+str(result)
-        user.number_full = fullnumber
-        user.addToPassword(fullnumber)
-
+        self.n1 =number1
+        self.n2 = number2
+        self.r = result
+        self.fn = str(self.n1)+str(self.n2)+str(self.r)
 
     def getRow(self, character):
         return {
@@ -248,6 +252,9 @@ if __name__== "__main__":
     aj = myExcel()
     aj.getRandomNumber(user)
     print("Number 1: {}\nNumber 2: {}\nOperation: {}\nResult: {}".format(user.number_1, user.number_2, user.operation, user.number_result))
+
+    for i in range(0,15):
+        print(aj.getRandomItem("Action"))
 
 
 
