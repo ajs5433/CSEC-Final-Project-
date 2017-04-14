@@ -22,7 +22,7 @@ except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
-class Ui_characterSentenceWindow(object):
+class Ui_characterSentenceWindow2(object):
     def setupUi(self, characterSentenceWindow):
         characterSentenceWindow.setObjectName(_fromUtf8("characterSentenceWindow"))
         characterSentenceWindow.resize(506, 343)

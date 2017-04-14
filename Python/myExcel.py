@@ -1,6 +1,7 @@
 import sys
 import xlrd
 import random
+from myUser import createUser
 
 # from xlrd.sheet import ctype_text
 
@@ -120,21 +121,32 @@ class myExcel(object):
         flag = True;
 
         while(flag):
-            operation = random.randint(1,5)
+            operation = random.randint(1,4)
 
             if (operation == 1):        #Sum
+                print("sum")
+                user.operation = "add"
                 number1 = random.randint(0,9)
                 number2 = random.randint(0,9)
                 result = number1 +number2
+                flag = False;
             elif(operation == 2):       #Rest
+                print("r")
+                user.operation = "substract"
                 number1 = random.randint(0, 9)
                 number2 = random.randint(0, 9)
                 result = number1 - number2
+                flag = False;
             elif(operation==3):         #Mult
+                print("m")
+                user.operation = "multiply"
                 number1 = random.randint(0, 9)
                 number2 = random.randint(0, 9)
                 result = number1 * number2
+                flag = False;
             elif(operation == 4):
+                print("d")
+                user.operation = "divide"
                 while(True):
                     number1 = random.randint(0, 9)
                     number2 = random.randint(0, 9)
@@ -146,10 +158,17 @@ class myExcel(object):
 
                     if((result ==0) and (number1>number2)):
                         continue;
-            user.number_1 = number1
-            user.number_2 = number2
-            user.number_result = result
-            user.number_full = ""+number1+""+number2+""+result;
+                flag = False;
+            else:
+                user.operation = "exponentiation"
+
+        user.number_1 = number1
+        user.number_2 = number2
+        user.number_result = result
+        fullnumber =str(number1)+str(number2)+str(result)
+        user.number_full = fullnumber
+        user.addToPassword(fullnumber)
+
 
     def getRow(self, character):
         return {
@@ -180,6 +199,13 @@ class myExcel(object):
             'Y': 25,
             'Z': 26,
         }[character]
+
+
+if __name__== "__main__":
+    user = createUser()
+    aj = myExcel()
+    aj.getRandomNumber(user)
+    print("Number 1: {}\nNumber 2: {}\nOperation: {}\nResult: {}".format(user.number_1, user.number_2, user.operation, user.number_result))
 
 
 

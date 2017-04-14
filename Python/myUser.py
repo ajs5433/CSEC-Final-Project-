@@ -2,7 +2,6 @@ import datetime
 import time
 import json
 import os
-from myUser import createUser
 from datetime import datetime
 
 filepath = 'A:/Desktop/myProject/Project Files/userBook.txt'
@@ -31,6 +30,7 @@ class createUser():
 
     number_1 = ""
     number_2 = ""
+    operation = ""
     number_result =""
     number_full = ""
 
@@ -40,13 +40,15 @@ class createUser():
     first_login = ""
     last_login = ""
 
-    def __init__(self, n, l, pt):
+    def __init__(self):
         #print("New User!")
+        """
         self.name = n
         self.lastName = l
         self.passwordType = pt
-
+        
         self.username = self.name + self.lastName + self.passwordType
+        """
 
     def save(self):
         #print("Saving user")

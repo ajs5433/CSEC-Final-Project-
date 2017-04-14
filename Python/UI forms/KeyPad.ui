@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>keyPad</string>
   </property>
   <widget class="QFrame" name="frame">
    <property name="geometry">
@@ -567,12 +567,6 @@
     </rect>
    </property>
   </widget>
-  <zorder>frame</zorder>
-  <zorder>label_2</zorder>
-  <zorder>next_btn</zorder>
-  <zorder>label_3</zorder>
-  <zorder>number_le</zorder>
-  <zorder>btn_15</zorder>
  </widget>
  <resources/>
  <connections/>
