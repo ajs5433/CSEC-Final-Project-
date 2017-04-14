@@ -78,7 +78,11 @@
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">background: rgb(255, 255, 255)</string>
+     <string notr="true">QGroupBox 
+       { 
+           background-color: rgb(255, 255,255); 
+           border:1px solid rgb(255, 170, 255); 
+       }</string>
     </property>
     <property name="text">
      <string>3</string>
@@ -103,7 +107,11 @@
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">background: rgb(220, 255, 60)</string>
+     <string notr="true">QGroupBox 
+       { 
+           background-color: rgb(255, 255,255); 
+           border:1px solid rgb(255, 170, 255); 
+       }</string>
     </property>
     <property name="text">
      <string>+</string>
@@ -153,7 +161,11 @@
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">background: rgb(255, 255, 255)</string>
+     <string notr="true">QGroupBox 
+       { 
+           background-color: rgb(255, 255,255); 
+           border:1px solid rgb(255, 170, 255); 
+       }</string>
     </property>
     <property name="text">
      <string>7</string>
@@ -203,7 +215,11 @@
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">background: rgb(255, 255, 255)</string>
+     <string notr="true">QGroupBox 
+       { 
+           background-color: rgb(255, 255,255); 
+           border:1px solid rgb(255, 170, 255); 
+       }</string>
     </property>
     <property name="text">
      <string>8</string>
@@ -228,7 +244,11 @@
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">background: rgb(255, 255, 255)</string>
+     <string notr="true">QGroupBox 
+       { 
+           background-color: rgb(255, 255,255); 
+           border:1px solid rgb(255, 170, 255); 
+       }</string>
     </property>
     <property name="text">
      <string>1</string>
@@ -253,7 +273,11 @@
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">background: rgb(255, 255, 255)</string>
+     <string notr="true">QGroupBox 
+       { 
+           background-color: rgb(255, 255,255); 
+           border:1px solid rgb(255, 170, 255); 
+       }</string>
     </property>
     <property name="text">
      <string>6</string>
@@ -278,7 +302,11 @@
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">background: rgb(255, 255, 255)</string>
+     <string notr="true">QGroupBox 
+       { 
+           background-color: rgb(255, 255,255); 
+           border:1px solid rgb(255, 170, 255); 
+       }</string>
     </property>
     <property name="text">
      <string>9</string>
@@ -303,7 +331,11 @@
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">background: rgb(255, 255, 255)</string>
+     <string notr="true">QGroupBox 
+       { 
+           background-color: rgb(255, 255,255); 
+           border:1px solid rgb(255, 170, 255); 
+       }</string>
     </property>
     <property name="text">
      <string>2</string>
@@ -328,7 +360,11 @@
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">background: rgb(255, 255, 255)</string>
+     <string notr="true">QGroupBox 
+       { 
+           background-color: rgb(255, 255,255); 
+           border:1px solid rgb(255, 170, 255); 
+       }</string>
     </property>
     <property name="text">
      <string>0</string>
@@ -403,7 +439,11 @@
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">background: rgb(255, 255, 255)</string>
+     <string notr="true">QGroupBox 
+       { 
+           background-color: rgb(255, 255,255); 
+           border:1px solid rgb(255, 170, 255); 
+       }</string>
     </property>
     <property name="text">
      <string>4</string>
@@ -453,7 +493,11 @@
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">background: rgb(255, 255, 255)</string>
+     <string notr="true">QGroupBox 
+       { 
+           background-color: rgb(255, 255,255); 
+           border:1px solid rgb(255, 170, 255); 
+       }</string>
     </property>
     <property name="text">
      <string>5</string>
@@ -478,7 +522,11 @@
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">background: rgb(255, 255, 255)</string>
+     <string notr="true">QGroupBox 
+       { 
+           background-color: rgb(255, 255,255); 
+           border:1px solid rgb(255, 170, 255); 
+       }</string>
     </property>
     <property name="text">
      <string>-</string>

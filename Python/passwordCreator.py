@@ -96,6 +96,8 @@ class passwordGenerator(QtGui.QWidget):
     current_user = createUser()
     myOrder = ""
     dialogAttempts = 0
+    wait = True
+
     def __init__(self):
         super(passwordGenerator, self).__init__()
 
@@ -378,8 +380,12 @@ class passwordGenerator(QtGui.QWidget):
         numberWindow.close()
         KeyPad.show()
         fullNumberString = str(self.current_user.number_full)
+        #timer  = QTimer(self)
+        #timer.timeout.connect(self.shine)
+        #timer.setInterval(1000)
         for c in fullNumberString:
             self.shine(c)
+            #timer.start(1000)
         keypad_window.next_btn.clicked.connect(self.keypadclick)
 
     def donothing(self):
@@ -389,60 +395,43 @@ class passwordGenerator(QtGui.QWidget):
         fullNumberString = str(self.current_user.number_full)
         if(keypad_window.number_le.text()==fullNumberString):
             for c in fullNumberString:
-                self.shine(c)
+                #self.shine(c)
+                QtCore.QTimer.singleShot(1000, self.shine(c))
             self.nextStep_event()
 
-    def timeout(self):
-        print("in timeout")
-
     def shine(self, number):
-        n = number
-        timer  = QTimer(self)
-        timer.timeout.connect(self.timeout)
-        delay = 1000
         if(number =='1'):
             keypad_window.btn_1.setStyleSheet("Background: rgb(220, 255, 60)")
-            timer.start(delay)
             keypad_window.btn_1.setStyleSheet("")
         elif (number == '2'):
             keypad_window.btn_2.setStyleSheet("Background: rgb(220, 255, 60)")
-            timer.start(delay)
             keypad_window.btn_2.setStyleSheet("")
         elif (number == '3'):
             keypad_window.btn_3.setStyleSheet("Background: rgb(220, 255, 60)")
-            timer.start(delay)
             keypad_window.btn_3.setStyleSheet("")
         elif (number == '4'):
             keypad_window.btn_4.setStyleSheet("Background: rgb(220, 255, 60)")
-            timer.start(delay)
             keypad_window.btn_4.setStyleSheet("")
         elif (number == '5'):
             keypad_window.btn_5.setStyleSheet("Background: rgb(220, 255, 60)")
-            timer.start(delay)
             keypad_window.btn_5.setStyleSheet("")
         elif (number == '6'):
             keypad_window.btn_6.setStyleSheet("Background: rgb(220, 255, 60)")
-            timer.start(delay)
             keypad_window.btn_6.setStyleSheet("")
         elif (number == '7'):
             keypad_window.btn_7.setStyleSheet("Background: rgb(220, 255, 60)")
-            timer.start(delay)
             keypad_window.btn_7.setStyleSheet("")
         elif (number == '8'):
             keypad_window.btn_8.setStyleSheet("Background: rgb(220, 255, 60)")
-            timer.start(delay)
             keypad_window.btn_8.setStyleSheet("")
         elif (number == "9"):
             keypad_window.btn_9.setStyleSheet("Background: rgb(220, 255, 60)")
-            timer.start(delay)
             keypad_window.btn_9.setStyleSheet("")
         elif (number == "0"):
             keypad_window.btn_10.setStyleSheet("Background: rgb(220, 255, 60)")
-            timer.start(delay)
             keypad_window.btn_10.setStyleSheet("")
         elif (number == "-"):
             keypad_window.btn_minus.setStyleSheet("Background: rgb(220, 255, 60)")
-            timer.start(delay)
             keypad_window.btn_minus.setStyleSheet("")
 
     def saveSymbol(self):
