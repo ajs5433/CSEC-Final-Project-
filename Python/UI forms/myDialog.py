@@ -42,8 +42,8 @@ class Ui_myDialog(object):
         self.label.setObjectName(_fromUtf8("label"))
 
         self.retranslateUi(myDialog)
-        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("accepted()")), myDialog.accept)
-        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("rejected()")), myDialog.reject)
+        #QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("accepted()")), myDialog.accept)
+        #QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("rejected()")), myDialog.reject)
         QtCore.QMetaObject.connectSlotsByName(myDialog)
 
     def retranslateUi(self, myDialog):

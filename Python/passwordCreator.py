@@ -9,7 +9,7 @@ from myExcel import myExcel
 sys.path.append("A:/Desktop/myProject/Python/UI forms")
 
 from backgroundWindow import Ui_BackgroundWindow
-#from beforeStarting import Ui_beforeStarting
+from beforeStarting import Ui_beforeStarting
 from calculateNumbers import Ui_calculateNumbersWindow
 from createUserWindow import Ui_createUserWindow
 from forgotPassword import Ui_forgotPasswordWindow
@@ -17,7 +17,9 @@ from KeyPad import Ui_keyPad
 from learningPassword import Ui_learningPasswordWindow
 from loginWindow import Ui_loginWindow
 from mainWindow import Ui_MainWindow
+from myDialog import Ui_myDialog
 from numberWindow import Ui_numberWindow
+from PAO2selectCharacterWindow import Ui_PAO2characterWindow
 from routineCheck import Ui_Dialog
 from selectCharacterWindow import Ui_characterWindow
 from selectCharacterWindow2 import Ui_characterSentenceWindow2
@@ -51,7 +53,9 @@ KeyPad = QtGui.QWidget()
 learningPassword = QtGui.QWidget()
 loginWindow = QtGui.QWidget()
 mainWindow = QtGui.QWidget()
+myDialog = QtGui.QWidget()
 numberWindow = QtGui.QWidget()
+PAO2selectCharacterWindow =QtGui.QWidget()
 routineCheck = QtGui.QWidget()
 selectCharacterWindow = QtGui.QWidget()
 selectCharacterWindow2 = QtGui.QWidget()
@@ -69,7 +73,7 @@ symbol_window = Ui_selectSymbol()
 """
 
 background_window = Ui_BackgroundWindow()
-# before_starting_window = Ui_beforeStarting()
+before_starting_window = Ui_beforeStarting()
 calculate_numbers = Ui_calculateNumbersWindow()
 create_user_window = Ui_createUserWindow()
 forgot_password = Ui_forgotPasswordWindow()
@@ -77,7 +81,9 @@ keypad_window = Ui_keyPad()
 # learningPassword = Ui_form()
 login_window = Ui_loginWindow()
 main_window = Ui_MainWindow()
+my_dialog = Ui_myDialog()
 number_window = Ui_numberWindow()
+PAO2_select_character_window = Ui_PAO2characterWindow()
 routine_check = Ui_Dialog()
 select_character_window = Ui_characterWindow()
 select_character_window_2 = Ui_characterSentenceWindow2()
@@ -87,7 +93,7 @@ class passwordGenerator(QtGui.QWidget):
     orderSelect = 0
     current_user = createUser()
     myOrder = ""
-
+    dialogAttempts = 0
     def __init__(self):
         super(passwordGenerator, self).__init__()
 
@@ -101,7 +107,7 @@ class passwordGenerator(QtGui.QWidget):
         """
 
         #background_window.setupUi(backgroundWindow)
-        # before_starting_window.setupUi(beforeStarting)
+        before_starting_window.setupUi(beforeStarting)
         calculate_numbers.setupUi(calculateNumbers)
         create_user_window.setupUi(createUserWindow)
         forgot_password.setupUi(forgotPassword)
@@ -109,13 +115,15 @@ class passwordGenerator(QtGui.QWidget):
         # learningPassword.setupUi(learningPassword)
         login_window.setupUi(loginWindow)
         main_window.setupUi(mainWindow)
+        my_dialog.setupUi(myDialog)
         number_window.setupUi(numberWindow)
+        PAO2_select_character_window.setupUi(PAO2selectCharacterWindow)
         routine_check.setupUi(routineCheck)
         select_character_window.setupUi(selectCharacterWindow)
         select_character_window_2.setupUi(selectCharacterWindow2)
         select_symbol_window.setupUi(selectSymbolWindow)
         create_user_window.setupUi(createUserWindow)
-
+        my_dialog.buttonBox.clicked.connect(self.dialogClose)
         select_symbol_window.pushButton_2.clicked.connect(self.setupSymbolWindow)
 
     def openWindow(self):
@@ -123,21 +131,25 @@ class passwordGenerator(QtGui.QWidget):
         random.shuffle(order_medium_mode)
         order_normal_mode.insert(len(order_normal_mode), 'complete')
         order_medium_mode.insert(len(order_medium_mode), 'complete')
+        before_starting_window.pushButton.clicked.connect(self.closeInfo)
         main_window.createNewPassword_btn.clicked.connect(self.nextStep_event) #Normal
         main_window.createNewPassword_btn_2.clicked.connect(self.nextStep_event)  # Normal
         #main_window.createNewPassword_btn_2.connect(self.nextStep_event)  #Medium
         #main_window.confirmPasswordCreated_btn.connect(self.confirmPasswordCreated_event)  # Check password
         self.current_user = createUser()
         self.setupCharacterWindow(select_character_window)
+        self.setupCharacterWindow(PAO2_select_character_window)
         #self.setupCharacterWindow(select_character_window_2)
         main_window.createNewPassword_btn.setObjectName("Normal Passwords")
         main_window.createNewPassword_btn_2.setObjectName("Medium Passwords")
         #createUserWindow.show()
         #loginWindow.show()
         mainWindow.show()
+        beforeStarting.show()
         sys.exit(app.exec_())
 
-
+    def closeInfo(self):
+        beforeStarting.close()
 
     def setupCharacterWindow(self, charWindow):
         random.shuffle(myList)
@@ -208,6 +220,7 @@ class passwordGenerator(QtGui.QWidget):
         select_character_window.pushButton.setIconSize(myIconSize)
 
     def closeWindows(self):
+        myDialog.close()
         calculateNumbers.close()
         createUserWindow.close()
         forgotPassword.close()
@@ -236,24 +249,27 @@ class passwordGenerator(QtGui.QWidget):
     def checkiftestispassed(self):
         pushedBy = self.sender().objectName()
 
-        attempts = 0
-        while (attempts < 5):
-            if(routine_check.passwordCheck_le.text()== self.current_user.password):
-                attempts = 10
-            else:
-                attempts = attempts+1
-                #put Dialog here
+        if(routine_check.passwordCheck_le.text()== self.current_user.password):
+            self.dialogAttempts = 0
+        else:
+            self.dialogAttempts = self.dialogAttempts+1
+            dialogString = "That is not the current password! Include all the passwords up to this point\n you have a total of " + str(4-self.dialogAttempts)+ " attempts left."
+            my_dialog.label.setText(dialogString)
+            myDialog.show()
 
-        if(attempts == 10):
+        if(self.dialogAttempts == 0):
             routineCheck.close()
             self.testPassed()
-        else:
-            #put Dialog here
-            myDialog = QtGui.QDialog("The current password we have is "+ self.current_user.password)
+        elif(self.dialogAttempts == 4):
+            dialogString= "The password that we have on file is '"+ self.current_user.password+ "' remember it for next time."
+            my_dialog.label.setText(dialogString)
             myDialog.show()
+            self.dialogAttempts = 0
             self.testPassed()
 
     def testPassed(self):
+        self.closeWindows()
+
         pushedBy = self.sender().objectName()
 
         if (pushedBy == "Normal Passwords"):
@@ -269,13 +285,13 @@ class passwordGenerator(QtGui.QWidget):
         elif(self.myOrder[self.orderSelect]=='PAO1'):
             self.orderSelect+=1
             #MainWindow.close()
-            select_character_window.pushButton.setObjectName("PAO1")
-            select_character_window.pushButton.clicked.connect(self.characterSelected)
+            select_character_window.next_btn.setObjectName("PAO1")
+            select_character_window.next_btn.clicked.connect(self.characterSelected)
             selectCharacterWindow.show()
         elif(self.myOrder[self.orderSelect]=='PAO2'):
             self.orderSelect += 1
-            select_character_window.pushButton.setObjectName("PAO2")
-            select_character_window.pushButton.clicked.connect(self.characterSelected)
+            PAO2_select_character_window.next_btn.setObjectName("PAO2")
+            PAO2_select_character_window.next_btn.clicked.connect(self.characterSelected)
             #MainWindow.close()
             selectCharacterWindow.show()
         elif(self.myOrder[self.orderSelect]=='Number'):
@@ -310,14 +326,19 @@ class passwordGenerator(QtGui.QWidget):
             self.current_user.addToPassword(symbolString)
             self.nextStep_event()
 
+    def dialogClose(self):
+        myDialog.close()
 
     def characterSelected(self):
         pushedBy = pushedBy = self.sender().objectName()
-        myName = select_character_window.password_label.text()
+        print("character selected")
+        nameR = select_character_window.password_label.text()
+        myName = select_character_window.name_label.text()
         myAction = xlsheet.getRandomItem("Action")
         myObject = xlsheet.getRandomItem("Object")
-
         myIconSize = QtCore.QSize(81, 81)
+
+        #select_character_window_2.name_label.setText(myName)
         select_character_window_2.action_label.setText(myAction)
         select_character_window_2.object_label.setText(myObject)
         myIcon = QtGui.QIcon()
@@ -325,9 +346,25 @@ class passwordGenerator(QtGui.QWidget):
         select_character_window_2.pushButton.setIcon(myIcon)
         select_character_window_2.pushButton.setIconSize(myIconSize)
         select_character_window_2.pushButton.setToolTip(myName)
+        psswString = nameR + myAction[0]+myObject[0]
 
+        if(pushedBy== "PAO1"):
+            print("PAO1")
+            self.current_user.PAO1_person = myName
+            self.current_user.PAO1_object = myObject
+            self.current_user.PAO1_action = myAction
+            self.current_user.PAO1_full = psswString
+            selectCharacterWindow.close()
+        elif (pushedBy == "PAO2"):
+            print("PAO2")
+            self.current_user.PAO2_person = myName
+            self.current_user.PAO2_object = myObject
+            self.current_user.PAO2_action = myAction
+            self.current_user.PAO2_full = psswString
+            PAO2selectCharacterWindow.close()
+        self.current_user.addToPassword(psswString)
 
-
+        selectCharacterWindow2.show()
 
 
 if __name__ == "__main__":
