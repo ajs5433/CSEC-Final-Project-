@@ -4,7 +4,8 @@ import random
 from PyQt4 import QtGui
 from PyQt4 import QtCore
 from PyQt4.QtCore import QObject
-import time
+from PyQt4.QtCore import QTimer
+#import time
 
 from myExcel import myExcel
 sys.path.append("A:/Desktop/myProject/Python/UI forms")
@@ -34,9 +35,9 @@ symbolsPath = "A:/Desktop/myProject/Project Files/Symbols/"
 buttonName = ""
 
 myList = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26]
-order_normal_mode = ['PAO1', 'Number', 'Symbol']
+#order_normal_mode = ['PAO1', 'Number', 'Symbol']
 order_medium_mode = ['PAO1', 'PAO2', 'Number', 'Symbol']
-
+order_normal_mode = [ 'Number','PAO1', 'Symbol']
 app = QtGui.QApplication(sys.argv)
 #MainWindow = QtGui.QMainWindow()
 #loginWindow = QtGui.QWidget()
@@ -128,7 +129,7 @@ class passwordGenerator(QtGui.QWidget):
         select_symbol_window.pushButton_2.clicked.connect(self.setupSymbolWindow)
 
     def openWindow(self):
-        random.shuffle(order_normal_mode)
+        #random.shuffle(order_normal_mode)
         random.shuffle(order_medium_mode)
         order_normal_mode.insert(len(order_normal_mode), 'complete')
         order_medium_mode.insert(len(order_medium_mode), 'complete')
@@ -391,51 +392,57 @@ class passwordGenerator(QtGui.QWidget):
                 self.shine(c)
             self.nextStep_event()
 
+    def timeout(self):
+        print("in timeout")
 
     def shine(self, number):
+        n = number
+        timer  = QTimer(self)
+        timer.timeout.connect(self.timeout)
+        delay = 1000
         if(number =='1'):
             keypad_window.btn_1.setStyleSheet("Background: rgb(220, 255, 60)")
-            time.sleep(1)
+            timer.start(delay)
             keypad_window.btn_1.setStyleSheet("")
         elif (number == '2'):
             keypad_window.btn_2.setStyleSheet("Background: rgb(220, 255, 60)")
-            time.sleep(1)
+            timer.start(delay)
             keypad_window.btn_2.setStyleSheet("")
         elif (number == '3'):
             keypad_window.btn_3.setStyleSheet("Background: rgb(220, 255, 60)")
-            time.sleep(1)
+            timer.start(delay)
             keypad_window.btn_3.setStyleSheet("")
         elif (number == '4'):
             keypad_window.btn_4.setStyleSheet("Background: rgb(220, 255, 60)")
-            time.sleep(1)
+            timer.start(delay)
             keypad_window.btn_4.setStyleSheet("")
         elif (number == '5'):
             keypad_window.btn_5.setStyleSheet("Background: rgb(220, 255, 60)")
-            time.sleep(1)
+            timer.start(delay)
             keypad_window.btn_5.setStyleSheet("")
         elif (number == '6'):
             keypad_window.btn_6.setStyleSheet("Background: rgb(220, 255, 60)")
-            time.sleep(1)
+            timer.start(delay)
             keypad_window.btn_6.setStyleSheet("")
         elif (number == '7'):
             keypad_window.btn_7.setStyleSheet("Background: rgb(220, 255, 60)")
-            time.sleep(1)
+            timer.start(delay)
             keypad_window.btn_7.setStyleSheet("")
         elif (number == '8'):
             keypad_window.btn_8.setStyleSheet("Background: rgb(220, 255, 60)")
-            time.sleep(1)
+            timer.start(delay)
             keypad_window.btn_8.setStyleSheet("")
         elif (number == "9"):
             keypad_window.btn_9.setStyleSheet("Background: rgb(220, 255, 60)")
-            time.sleep(1)
+            timer.start(delay)
             keypad_window.btn_9.setStyleSheet("")
         elif (number == "0"):
-            keypad_window.btn_0.setStyleSheet("Background: rgb(220, 255, 60)")
-            time.sleep(1)
-            keypad_window.btn_0.setStyleSheet("")
+            keypad_window.btn_10.setStyleSheet("Background: rgb(220, 255, 60)")
+            timer.start(delay)
+            keypad_window.btn_10.setStyleSheet("")
         elif (number == "-"):
             keypad_window.btn_minus.setStyleSheet("Background: rgb(220, 255, 60)")
-            time.sleep(1)
+            timer.start(delay)
             keypad_window.btn_minus.setStyleSheet("")
 
     def saveSymbol(self):
