@@ -20,6 +20,7 @@ from mainWindow import Ui_MainWindow
 from numberWindow import Ui_numberWindow
 from routineCheck import Ui_Dialog
 from selectCharacterWindow import Ui_characterWindow
+from selectCharacterWindow2 import Ui_characterSentenceWindow2
 from selectSymbolWindow import Ui_selectSymbol
 from createUserWindow import Ui_createUserWindow
 from myUser import createUser
@@ -53,6 +54,7 @@ mainWindow = QtGui.QWidget()
 numberWindow = QtGui.QWidget()
 routineCheck = QtGui.QWidget()
 selectCharacterWindow = QtGui.QWidget()
+selectCharacterWindow2 = QtGui.QWidget()
 selectSymbolWindow = QtGui.QWidget()
 createUserWindow = QtGui.QMainWindow()
 
@@ -78,6 +80,7 @@ main_window = Ui_MainWindow()
 number_window = Ui_numberWindow()
 routine_check = Ui_Dialog()
 select_character_window = Ui_characterWindow()
+select_character_window_2 = Ui_characterSentenceWindow2()
 select_symbol_window = Ui_selectSymbol()
 
 class passwordGenerator(QtGui.QWidget):
@@ -109,7 +112,7 @@ class passwordGenerator(QtGui.QWidget):
         number_window.setupUi(numberWindow)
         routine_check.setupUi(routineCheck)
         select_character_window.setupUi(selectCharacterWindow)
-        #select_character_window_2.setupUi(selectCharacterWindow2)
+        select_character_window_2.setupUi(selectCharacterWindow2)
         select_symbol_window.setupUi(selectSymbolWindow)
         create_user_window.setupUi(createUserWindow)
 
@@ -266,9 +269,13 @@ class passwordGenerator(QtGui.QWidget):
         elif(self.myOrder[self.orderSelect]=='PAO1'):
             self.orderSelect+=1
             #MainWindow.close()
+            select_character_window.pushButton.setObjectName("PAO1")
+            select_character_window.pushButton.clicked.connect(self.characterSelected)
             selectCharacterWindow.show()
         elif(self.myOrder[self.orderSelect]=='PAO2'):
             self.orderSelect += 1
+            select_character_window.pushButton.setObjectName("PAO2")
+            select_character_window.pushButton.clicked.connect(self.characterSelected)
             #MainWindow.close()
             selectCharacterWindow.show()
         elif(self.myOrder[self.orderSelect]=='Number'):
@@ -302,6 +309,23 @@ class passwordGenerator(QtGui.QWidget):
             self.current_user.symbol = symbolString
             self.current_user.addToPassword(symbolString)
             self.nextStep_event()
+
+
+    def characterSelected(self):
+        pushedBy = pushedBy = self.sender().objectName()
+        myName = select_character_window.password_label.text()
+        myAction = xlsheet.getRandomItem("Action")
+        myObject = xlsheet.getRandomItem("Object")
+
+        myIconSize = QtCore.QSize(81, 81)
+        select_character_window_2.action_label.setText(myAction)
+        select_character_window_2.object_label.setText(myObject)
+        myIcon = QtGui.QIcon()
+        myIcon.addPixmap(QtGui.QPixmap(imagesPath + myName + ".jpg"))
+        select_character_window_2.pushButton.setIcon(myIcon)
+        select_character_window_2.pushButton.setIconSize(myIconSize)
+        select_character_window_2.pushButton.setToolTip(myName)
+
 
 
 

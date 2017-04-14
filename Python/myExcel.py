@@ -43,7 +43,47 @@ class myExcel(object):
                             # this is the column
                             info = str(self.sheet0.cell(rowIndex, idx))
                             #print(info)
-                            break
+                            continue
+                        else:
+                            randomNumber = randomNumber - 1
+
+                if info =="text:''":
+                    print("trying again")
+                else:
+                    name = info[6:len(info)-1]#+info[:len(info)-1]
+                    #print(info)
+                    #print (name)
+                    break
+
+            except Exception:
+                print("Unexpected error: ",e = sys.exc_info()[0]);
+
+        return name
+
+    def getRandomItem(self, itemType):
+
+        while True:
+            # print(randomNumber)
+
+            try:
+                # name = xlsheet.getName(5, 'E')
+                counter = 0
+                rowIndex = random.randint(2,27)
+                # print("letter row: ", letter, rowIndex)
+                for idx, cell in enumerate(self.row):
+                    # Counting the columns in that type of item
+                    if (cell.value.startswith(itemType)):
+                        counter = counter + 1
+
+                randomNumber = random.randint(0, counter*7)
+                randomNumber = randomNumber % counter
+                for idx, cell in enumerate(self.row):
+                    if (cell.value.startswith(itemType)):
+                        if (randomNumber == 0):
+                            # this is the column
+                            info = str(self.sheet0.cell(rowIndex, idx))
+                            #print(info)
+                            continue
                         else:
                             randomNumber = randomNumber - 1
 
@@ -122,6 +162,7 @@ class myExcel(object):
 
         while(flag):
             operation = random.randint(1,4)
+            result = 1
 
             if (operation == 1):        #Sum
                 print("sum")
@@ -147,7 +188,7 @@ class myExcel(object):
             elif(operation == 4):
                 print("d")
                 user.operation = "divide"
-                while(True):
+                while(result!=0):
                     number1 = random.randint(0, 9)
                     number2 = random.randint(0, 9)
 
@@ -157,8 +198,9 @@ class myExcel(object):
                         result = 1
 
                     if((result ==0) and (number1>number2)):
-                        continue;
-                flag = False;
+                        flag = False;
+                        break;
+
             else:
                 user.operation = "exponentiation"
 
