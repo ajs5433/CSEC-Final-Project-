@@ -75,6 +75,7 @@ class myExcel(object):
                 # name = xlsheet.getName(5, 'E')
                 counter = 0
                 rowIndex = random.randint(1,26)
+                print(rowIndex)
                 #print(rowIndex)
                 # print("letter row: ", letter, rowIndex)
                 for idx, cell in enumerate(self.row):

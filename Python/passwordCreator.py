@@ -10,7 +10,7 @@ from PyQt4.QtCore import QTimer
 from myExcel import myExcel
 sys.path.append("A:/Desktop/myProject/Python/UI forms")
 
-from backgroundWindow import Ui_BackgroundWindow
+from backgroundWindow import Ui_backgroundWindow
 from beforeStarting import Ui_beforeStarting
 from calculateNumbers import Ui_calculateNumbersWindow
 from createUserWindow import Ui_createUserWindow
@@ -35,9 +35,9 @@ symbolsPath = "A:/Desktop/myProject/Project Files/Symbols/"
 buttonName = ""
 
 myList = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26]
-#order_normal_mode = ['PAO1', 'Number', 'Symbol']
+order_normal_mode = ['PAO1', 'Number', 'Symbol']
 order_medium_mode = ['PAO1', 'PAO2', 'Number', 'Symbol']
-order_normal_mode = [ 'Number','PAO1', 'Symbol']
+#order_normal_mode = [ 'Number','PAO1', 'Symbol']
 app = QtGui.QApplication(sys.argv)
 #MainWindow = QtGui.QMainWindow()
 #loginWindow = QtGui.QWidget()
@@ -74,7 +74,7 @@ number_window = Ui_numberWindow()
 symbol_window = Ui_selectSymbol()
 """
 
-background_window = Ui_BackgroundWindow()
+background_window = Ui_backgroundWindow()
 before_starting_window = Ui_beforeStarting()
 calculate_numbers = Ui_calculateNumbersWindow()
 create_user_window = Ui_createUserWindow()
@@ -110,7 +110,7 @@ class passwordGenerator(QtGui.QWidget):
         symbol_window.setupUi(symbolWindow)
         """
 
-        #background_window.setupUi(backgroundWindow)
+        background_window.setupUi(backgroundWindow)
         before_starting_window.setupUi(beforeStarting)
         calculate_numbers.setupUi(calculateNumbers)
         create_user_window.setupUi(createUserWindow)
@@ -131,7 +131,8 @@ class passwordGenerator(QtGui.QWidget):
         select_symbol_window.pushButton_2.clicked.connect(self.setupSymbolWindow)
 
     def openWindow(self):
-        #random.shuffle(order_normal_mode)
+        backgroundWindow.show()
+        random.shuffle(order_normal_mode)
         random.shuffle(order_medium_mode)
         order_normal_mode.insert(len(order_normal_mode), 'complete')
         order_medium_mode.insert(len(order_medium_mode), 'complete')
@@ -263,12 +264,14 @@ class passwordGenerator(QtGui.QWidget):
 
         if(self.dialogAttempts == 0):
             routineCheck.close()
+            routine_check.passwordCheck_le.setText("")
             self.testPassed()
         elif(self.dialogAttempts == 4):
             dialogString= "The password that we have on file is '"+ self.current_user.password+ "' remember it for next time."
             my_dialog.label.setText(dialogString)
             myDialog.show()
             self.dialogAttempts = 0
+            routine_check.passwordCheck_le.setText("")
             self.testPassed()
 
     def testPassed(self):
@@ -367,10 +370,19 @@ class passwordGenerator(QtGui.QWidget):
             calculateNumbers.close()
             numberWindow.show()
 
-
-
     def gotokeypad(self):
         if(str(number_window.wholenumber_le.text())==str(self.current_user.number_full)):
+            keypad_window.btn_1.clicked.connect(self.buttonPressed)
+            keypad_window.btn_2.clicked.connect(self.buttonPressed)
+            keypad_window.btn_3.clicked.connect(self.buttonPressed)
+            keypad_window.btn_4.clicked.connect(self.buttonPressed)
+            keypad_window.btn_5.clicked.connect(self.buttonPressed)
+            keypad_window.btn_6.clicked.connect(self.buttonPressed)
+            keypad_window.btn_7.clicked.connect(self.buttonPressed)
+            keypad_window.btn_8.clicked.connect(self.buttonPressed)
+            keypad_window.btn_9.clicked.connect(self.buttonPressed)
+            keypad_window.btn_10.clicked.connect(self.buttonPressed)
+            keypad_window.btn_minus.clicked.connect(self.buttonPressed)
             self.inkeypad()
         else:
             print("you need {} and you are typing {}".format(str(number_window.wholenumber_le.text()), str(self.current_user.number_results)))
@@ -383,9 +395,6 @@ class passwordGenerator(QtGui.QWidget):
         #timer  = QTimer(self)
         #timer.timeout.connect(self.shine)
         #timer.setInterval(1000)
-        for c in fullNumberString:
-            self.shine(c)
-            #timer.start(1000)
         keypad_window.next_btn.clicked.connect(self.keypadclick)
 
     def donothing(self):
@@ -393,46 +402,12 @@ class passwordGenerator(QtGui.QWidget):
 
     def keypadclick(self):
         fullNumberString = str(self.current_user.number_full)
-        if(keypad_window.number_le.text()==fullNumberString):
-            for c in fullNumberString:
-                #self.shine(c)
-                QtCore.QTimer.singleShot(1000, self.shine(c))
+        if(keypad_window.number_le.text()==str(fullNumberString)):
             self.nextStep_event()
+        else:
+            self.buttonReleased()
+            keypad_window.number_le.setText("")
 
-    def shine(self, number):
-        if(number =='1'):
-            keypad_window.btn_1.setStyleSheet("Background: rgb(220, 255, 60)")
-            keypad_window.btn_1.setStyleSheet("")
-        elif (number == '2'):
-            keypad_window.btn_2.setStyleSheet("Background: rgb(220, 255, 60)")
-            keypad_window.btn_2.setStyleSheet("")
-        elif (number == '3'):
-            keypad_window.btn_3.setStyleSheet("Background: rgb(220, 255, 60)")
-            keypad_window.btn_3.setStyleSheet("")
-        elif (number == '4'):
-            keypad_window.btn_4.setStyleSheet("Background: rgb(220, 255, 60)")
-            keypad_window.btn_4.setStyleSheet("")
-        elif (number == '5'):
-            keypad_window.btn_5.setStyleSheet("Background: rgb(220, 255, 60)")
-            keypad_window.btn_5.setStyleSheet("")
-        elif (number == '6'):
-            keypad_window.btn_6.setStyleSheet("Background: rgb(220, 255, 60)")
-            keypad_window.btn_6.setStyleSheet("")
-        elif (number == '7'):
-            keypad_window.btn_7.setStyleSheet("Background: rgb(220, 255, 60)")
-            keypad_window.btn_7.setStyleSheet("")
-        elif (number == '8'):
-            keypad_window.btn_8.setStyleSheet("Background: rgb(220, 255, 60)")
-            keypad_window.btn_8.setStyleSheet("")
-        elif (number == "9"):
-            keypad_window.btn_9.setStyleSheet("Background: rgb(220, 255, 60)")
-            keypad_window.btn_9.setStyleSheet("")
-        elif (number == "0"):
-            keypad_window.btn_10.setStyleSheet("Background: rgb(220, 255, 60)")
-            keypad_window.btn_10.setStyleSheet("")
-        elif (number == "-"):
-            keypad_window.btn_minus.setStyleSheet("Background: rgb(220, 255, 60)")
-            keypad_window.btn_minus.setStyleSheet("")
 
     def saveSymbol(self):
         if(select_symbol_window.lineEdit.text()!=""):
@@ -454,7 +429,7 @@ class passwordGenerator(QtGui.QWidget):
             myObject = xlsheet.getRandomItem("Object")
             myIconSize = QtCore.QSize(81, 81)
 
-            #select_character_window_2.name_label.setText(myName)
+            select_character_window_2.name_label.setText(myName)
             select_character_window_2.action_label.setText(myAction)
             select_character_window_2.object_label.setText(myObject)
             myIcon = QtGui.QIcon()
@@ -479,9 +454,63 @@ class passwordGenerator(QtGui.QWidget):
                 self.current_user.PAO2_full = psswString
                 PAO2selectCharacterWindow.close()
             self.current_user.addToPassword(psswString)
-
+            select_character_window_2.ok_btn.clicked.connect(self.confirmcharacterpassword1)
             selectCharacterWindow2.show()
 
+    def confirmcharacterpassword1(self):
+        if (select_character_window_2.lineEdit.text()==self.current_user.PAO1_full):
+            self.nextStep_event()
+
+    def buttonPressed(self):
+        name = self.sender().objectName()
+        string  = keypad_window.number_le.text()
+        if(name =="btn_1" ):
+            string = string + "1"
+            keypad_window.btn_1.setStyleSheet("background:rgb(153, 255, 51)" )
+        if(name =="btn_2" ):
+            string = string + "2"
+            keypad_window.btn_2.setStyleSheet("background:rgb(153, 255, 51)")
+        if(name =="btn_3" ):
+            string = string + "3"
+            keypad_window.btn_3.setStyleSheet("background:rgb(153, 255, 51)")
+        if(name =="btn_4" ):
+            string = string + "4"
+            keypad_window.btn_4.setStyleSheet("background:rgb(153, 255, 51)")
+        if(name =="btn_5" ):
+            string = string + "5"
+            keypad_window.btn_5.setStyleSheet("background:rgb(153, 255, 51)")
+        if(name =="btn_6" ):
+            string = string + "6"
+            keypad_window.btn_6.setStyleSheet("background:rgb(153, 255, 51)")
+        if (name == "btn_7"):
+            string = string + "7"
+            keypad_window.btn_7.setStyleSheet("background:rgb(153, 255, 51)")
+        if (name == "btn_8"):
+            string = string + "8"
+            keypad_window.btn_8.setStyleSheet("background:rgb(153, 255, 51)")
+        if (name == "btn_9"):
+            string = string + "9"
+            keypad_window.btn_9.setStyleSheet("background:rgb(153, 255, 51)")
+        if (name == "btn_10"):
+            string = string + "0"
+            keypad_window.btn_10.setStyleSheet("background:rgb(153, 255, 51)")
+        if (name == "btn_minus"):
+            string = string + "-"
+            keypad_window.btn_minus.setStyleSheet("background:rgb(153, 255, 51)")
+        keypad_window.number_le.setText(string)
+
+    def buttonReleased(self):
+        keypad_window.btn_1.setStyleSheet("background:rgb(255, 255, 255)")
+        keypad_window.btn_2.setStyleSheet("background:rgb(255, 255, 255)")
+        keypad_window.btn_3.setStyleSheet("background:rgb(255, 255, 255)")
+        keypad_window.btn_4.setStyleSheet("background:rgb(255, 255, 255)")
+        keypad_window.btn_5.setStyleSheet("background:rgb(255, 255, 255)")
+        keypad_window.btn_6.setStyleSheet("background:rgb(255, 255, 255)")
+        keypad_window.btn_7.setStyleSheet("background:rgb(255, 255, 255)")
+        keypad_window.btn_8.setStyleSheet("background:rgb(255, 255, 255)")
+        keypad_window.btn_9.setStyleSheet("background:rgb(255, 255, 255)")
+        keypad_window.btn_10.setStyleSheet("background:rgb(255, 255, 255)")
+        keypad_window.btn_minus.setStyleSheet("background:rgb(255, 255, 255)")
 
 if __name__ == "__main__":
     myApp = passwordGenerator()

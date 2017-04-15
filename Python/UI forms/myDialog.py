@@ -25,25 +25,26 @@ except AttributeError:
 class Ui_myDialog(object):
     def setupUi(self, myDialog):
         myDialog.setObjectName(_fromUtf8("myDialog"))
-        myDialog.resize(468, 254)
+        myDialog.resize(461, 229)
         self.buttonBox = QtGui.QDialogButtonBox(myDialog)
-        self.buttonBox.setGeometry(QtCore.QRect(210, 190, 221, 41))
+        self.buttonBox.setGeometry(QtCore.QRect(200, 170, 221, 41))
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
         self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName(_fromUtf8("buttonBox"))
         self.label = QtGui.QLabel(myDialog)
-        self.label.setGeometry(QtCore.QRect(40, 40, 391, 131))
+        self.label.setGeometry(QtCore.QRect(30, 20, 381, 131))
         font = QtGui.QFont()
         font.setFamily(_fromUtf8("Century Gothic"))
         font.setPointSize(10)
         self.label.setFont(font)
         self.label.setText(_fromUtf8(""))
         self.label.setAlignment(QtCore.Qt.AlignCenter)
+        self.label.setWordWrap(True)
         self.label.setObjectName(_fromUtf8("label"))
 
         self.retranslateUi(myDialog)
-        #QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("accepted()")), myDialog.accept)
-        #QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("rejected()")), myDialog.reject)
+#        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("accepted()")), myDialog.accept)
+#        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("rejected()")), myDialog.reject)
         QtCore.QMetaObject.connectSlotsByName(myDialog)
 
     def retranslateUi(self, myDialog):

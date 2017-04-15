@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Form</class>
- <widget class="QWidget" name="Form">
+ <class>keyPad</class>
+ <widget class="QWidget" name="keyPad">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>369</width>
-    <height>507</height>
+    <height>504</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background: rgb(0, 170, 255)</string>
+    <string notr="true">background: rgb(0, 187, 255)</string>
    </property>
    <property name="frameShape">
     <enum>QFrame::StyledPanel</enum>
@@ -78,11 +78,7 @@
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">QGroupBox 
-       { 
-           background-color: rgb(255, 255,255); 
-           border:1px solid rgb(255, 170, 255); 
-       }</string>
+     <string notr="true">background:rgb(255, 255, 255)</string>
     </property>
     <property name="text">
      <string>3</string>
@@ -107,11 +103,7 @@
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">QGroupBox 
-       { 
-           background-color: rgb(255, 255,255); 
-           border:1px solid rgb(255, 170, 255); 
-       }</string>
+     <string notr="true">background:rgb(255, 255, 255)</string>
     </property>
     <property name="text">
      <string>+</string>
@@ -136,7 +128,7 @@
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">background: rgb(255, 255, 255)</string>
+     <string notr="true">background:rgb(255, 255, 255)</string>
     </property>
     <property name="text">
      <string>enter</string>
@@ -161,11 +153,7 @@
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">QGroupBox 
-       { 
-           background-color: rgb(255, 255,255); 
-           border:1px solid rgb(255, 170, 255); 
-       }</string>
+     <string notr="true">background:rgb(255, 255, 255)</string>
     </property>
     <property name="text">
      <string>7</string>
@@ -215,11 +203,7 @@
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">QGroupBox 
-       { 
-           background-color: rgb(255, 255,255); 
-           border:1px solid rgb(255, 170, 255); 
-       }</string>
+     <string notr="true">background:rgb(255, 255, 255)</string>
     </property>
     <property name="text">
      <string>8</string>
@@ -244,11 +228,7 @@
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">QGroupBox 
-       { 
-           background-color: rgb(255, 255,255); 
-           border:1px solid rgb(255, 170, 255); 
-       }</string>
+     <string notr="true">background:rgb(255, 255, 255)</string>
     </property>
     <property name="text">
      <string>1</string>
@@ -273,11 +253,7 @@
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">QGroupBox 
-       { 
-           background-color: rgb(255, 255,255); 
-           border:1px solid rgb(255, 170, 255); 
-       }</string>
+     <string notr="true">background:rgb(255, 255, 255)</string>
     </property>
     <property name="text">
      <string>6</string>
@@ -302,11 +278,7 @@
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">QGroupBox 
-       { 
-           background-color: rgb(255, 255,255); 
-           border:1px solid rgb(255, 170, 255); 
-       }</string>
+     <string notr="true">background:rgb(255, 255, 255)</string>
     </property>
     <property name="text">
      <string>9</string>
@@ -331,11 +303,7 @@
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">QGroupBox 
-       { 
-           background-color: rgb(255, 255,255); 
-           border:1px solid rgb(255, 170, 255); 
-       }</string>
+     <string notr="true">background:rgb(255, 255, 255)</string>
     </property>
     <property name="text">
      <string>2</string>
@@ -360,11 +328,7 @@
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">QGroupBox 
-       { 
-           background-color: rgb(255, 255,255); 
-           border:1px solid rgb(255, 170, 255); 
-       }</string>
+     <string notr="true">background:rgb(255, 255, 255)</string>
     </property>
     <property name="text">
      <string>0</string>
@@ -389,7 +353,7 @@
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">background: rgb(255, 255, 255)</string>
+     <string notr="true">background:rgb(255, 255, 255)</string>
     </property>
     <property name="text">
      <string>*</string>
@@ -439,11 +403,7 @@
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">QGroupBox 
-       { 
-           background-color: rgb(255, 255,255); 
-           border:1px solid rgb(255, 170, 255); 
-       }</string>
+     <string notr="true">background:rgb(255, 255, 255)</string>
     </property>
     <property name="text">
      <string>4</string>
@@ -468,7 +428,7 @@
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">background: rgb(255, 255, 255)</string>
+     <string notr="true">background:rgb(255, 255, 255)</string>
     </property>
     <property name="text">
      <string>.</string>
@@ -493,11 +453,7 @@
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">QGroupBox 
-       { 
-           background-color: rgb(255, 255,255); 
-           border:1px solid rgb(255, 170, 255); 
-       }</string>
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string>5</string>
@@ -522,11 +478,7 @@
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">QGroupBox 
-       { 
-           background-color: rgb(255, 255,255); 
-           border:1px solid rgb(255, 170, 255); 
-       }</string>
+     <string notr="true">background:rgb(255, 255, 255)</string>
     </property>
     <property name="text">
      <string>-</string>
@@ -605,14 +557,23 @@
     <string>Your number:</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="number_le">
+  <widget class="QLabel" name="number_le">
    <property name="geometry">
     <rect>
-     <x>130</x>
+     <x>140</x>
      <y>450</y>
      <width>91</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background:rgb(255, 255, 255)</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
    </property>
   </widget>
  </widget>
