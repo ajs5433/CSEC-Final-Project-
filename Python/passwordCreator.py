@@ -127,8 +127,14 @@ class passwordGenerator(QtGui.QWidget):
         select_character_window_2.setupUi(selectCharacterWindow2)
         select_symbol_window.setupUi(selectSymbolWindow)
         create_user_window.setupUi(createUserWindow)
-        my_dialog.buttonBox.clicked.connect(self.dialogClose)
+
+        #Setting up events
+        select_character_window.next_btn.clicked.connect(self.characterSelected)
         select_symbol_window.pushButton_2.clicked.connect(self.setupSymbolWindow)
+        my_dialog.buttonBox.clicked.connect(self.dialogClose)
+        before_starting_window.pushButton.clicked.connect(self.closeInfo)
+        main_window.createNewPassword_btn.clicked.connect(self.nextStep_event) #Normal
+        main_window.createNewPassword_btn_2.clicked.connect(self.nextStep_event)  # Normal
 
     def openWindow(self):
         #backgroundWindow.show()
@@ -136,9 +142,9 @@ class passwordGenerator(QtGui.QWidget):
         random.shuffle(order_medium_mode)
         order_normal_mode.insert(len(order_normal_mode), 'complete')
         order_medium_mode.insert(len(order_medium_mode), 'complete')
-        before_starting_window.pushButton.clicked.connect(self.closeInfo)
-        main_window.createNewPassword_btn.clicked.connect(self.nextStep_event) #Normal
-        main_window.createNewPassword_btn_2.clicked.connect(self.nextStep_event)  # Normal
+        #before_starting_window.pushButton.clicked.connect(self.closeInfo)
+        #main_window.createNewPassword_btn.clicked.connect(self.nextStep_event) #Normal
+        #main_window.createNewPassword_btn_2.clicked.connect(self.nextStep_event)  # Normal
         #main_window.createNewPassword_btn_2.connect(self.nextStep_event)  #Medium
         #main_window.confirmPasswordCreated_btn.connect(self.confirmPasswordCreated_event)  # Check password
         self.current_user = createUser()
@@ -157,6 +163,7 @@ class passwordGenerator(QtGui.QWidget):
         beforeStarting.close()
 
     def setupCharacterWindow(self, charWindow):
+        print("@setupCharacterWindow")
         random.shuffle(myList)
         self.setupCW(charWindow.btn_1, myList[1])
         self.setupCW(charWindow.btn_2, myList[2])
@@ -197,6 +204,7 @@ class passwordGenerator(QtGui.QWidget):
         button.setObjectName(myName)
 
     def CWButtonPushed(self):
+        print("@CWButtonPushed")
         name = self.sender().objectName()
         select_character_window.name_label.setText(name)
         password = ""
@@ -225,6 +233,7 @@ class passwordGenerator(QtGui.QWidget):
         select_character_window.pushButton.setIconSize(myIconSize)
 
     def closeWindows(self):
+        print("@closeWindows")
         myDialog.close()
         calculateNumbers.close()
         createUserWindow.close()
@@ -236,23 +245,26 @@ class passwordGenerator(QtGui.QWidget):
         numberWindow.close()
         routineCheck.close()
         selectCharacterWindow.close()
-        #selectCharacterWindow2.close()
+        selectCharacterWindow2.close()
         selectSymbolWindow.close()
         createUserWindow.close()
 
     def nextStep_event(self):
+        print("@nextStepEvent")
         self.closeWindows()
         pushedBy = self.sender().objectName()
         print("puched by {}".format(pushedBy))
-        if (pushedBy != "Normal Passwords" and pushedBy != "Normal Passwords"):
-            routine_check.ok_btn.clicked.connect(self.checkiftestispassed)
+        if (pushedBy != "Normal Passwords" and pushedBy != "Medium Passwords"):
+            routine_check.ok_btn.clicked.connect(self.checkIfTestIsPassed)
             routine_check.ok_btn.setObjectName(pushedBy)
             routineCheck.show()
         else:
             self.testPassed()
 
-    def checkiftestispassed(self):
+    def checkIfTestIsPassed(self):
+        print("@checkIfTestIsPassed")
         pushedBy = self.sender().objectName()
+        print("pushed by ", pushedBy)
 
         if(str(routine_check.passwordCheck_le.text())== str(self.current_user.password)):
             print ("TEST PASSED!! The password is '{}' and you put '{}'".format( str(self.current_user.password) , str(routine_check.passwordCheck_le.text())))
@@ -281,8 +293,7 @@ class passwordGenerator(QtGui.QWidget):
             self.testPassed()
 
     def testPassed(self):
-        self.closeWindows()
-
+        print("@testPassed")
         pushedBy = self.sender().objectName()
 
         if (pushedBy == "Normal Passwords"):
@@ -293,21 +304,25 @@ class passwordGenerator(QtGui.QWidget):
         print(self.myOrder[self.orderSelect])
 
         if (self.myOrder[self.orderSelect]=='complete'):
+            print("inside complete!")
             self.orderSelect = 0
 
         elif(self.myOrder[self.orderSelect]=='PAO1'):
+            print("inside PAO1")
             self.orderSelect+=1
             #MainWindow.close()
             select_character_window.next_btn.setObjectName("PAO1")
-            select_character_window.next_btn.clicked.connect(self.characterSelected)
+            #select_character_window.next_btn.clicked.connect(self.characterSelected)
             selectCharacterWindow.show()
         elif(self.myOrder[self.orderSelect]=='PAO2'):
+            print("inside PAO2")
             self.orderSelect += 1
             PAO2_select_character_window.next_btn.setObjectName("PAO2")
             PAO2_select_character_window.next_btn.clicked.connect(self.characterSelected)
             #MainWindow.close()
             selectCharacterWindow.show()
         elif(self.myOrder[self.orderSelect]=='Number'):
+            print("inside Number")
             self.orderSelect += 1
             xlsheet.getRandomNumber()
             self.current_user.number_1 = xlsheet.n1
@@ -322,6 +337,7 @@ class passwordGenerator(QtGui.QWidget):
             calculate_numbers.ok_btn.clicked.connect(self.numbers2)
             calculateNumbers.show()
         else:
+            print("inside Symbol")
             self.orderSelect+=1
             select_symbol_window.next_btn.clicked.connect(self.saveSymbol)
             selectSymbolWindow.show()
@@ -330,6 +346,7 @@ class passwordGenerator(QtGui.QWidget):
         loginWindow.show()
 
     def setupSymbolWindow(self):
+        print("@setupSymbolWindow")
         mySymbol = xlsheet.getRandomSymbol()
         myIconSize = QtCore.QSize(101, 101)
         myIcon = QtGui.QIcon()
@@ -341,7 +358,7 @@ class passwordGenerator(QtGui.QWidget):
         print(mySymbol)
 
     def numbers2(self):
-
+        print("@numbers2")
         if (str(calculate_numbers.number1_le.text()) != str(self.current_user.number_1)):
             print(
                 "The value that you have is {} you are supposed to have {}".format(calculate_numbers.number1_le.text(),
@@ -372,11 +389,12 @@ class passwordGenerator(QtGui.QWidget):
             number_window.operation_label.setText(myOperationLabel)
             number_window.equal_label.setText("=")
             number_window.result_label.setText(str(self.current_user.number_result))
-            number_window.next_btn.clicked.connect(self.gotokeypad)
+            number_window.next_btn.clicked.connect(self.goToKeypad)
             calculateNumbers.close()
             numberWindow.show()
 
-    def gotokeypad(self):
+    def goToKeypad(self):
+        print("@goToKeypad")
         if(str(number_window.wholenumber_le.text())==str(self.current_user.number_full)):
             keypad_window.btn_1.clicked.connect(self.buttonPressed)
             keypad_window.btn_2.clicked.connect(self.buttonPressed)
@@ -389,11 +407,12 @@ class passwordGenerator(QtGui.QWidget):
             keypad_window.btn_9.clicked.connect(self.buttonPressed)
             keypad_window.btn_10.clicked.connect(self.buttonPressed)
             keypad_window.btn_minus.clicked.connect(self.buttonPressed)
-            self.inkeypad()
+            self.inKeypad()
         else:
             print("you need {} and you are typing {}".format(str(number_window.wholenumber_le.text()), str(self.current_user.number_results)))
 
-    def inkeypad(self):
+    def inKeypad(self):
+        print("@inKeypad")
         #keypad_window.next_btn.clicked.connect(self.donothing)
         numberWindow.close()
         KeyPad.show()
@@ -404,11 +423,11 @@ class passwordGenerator(QtGui.QWidget):
         keypad_window.next_btn.clicked.connect(self.keypadclick)
 
     def donothing(self):
-        print ("Have to wait for keypad")
+        print ("@donothing")
 
     def keypadclick(self):
         fullNumberString = str(self.current_user.number_full)
-        if(keypad_window.number_le.text()==str(fullNumberString)):
+        if(str(keypad_window.number_le.text())==str(fullNumberString)):
             self.nextStep_event()
         else:
             self.buttonReleased()
@@ -416,6 +435,7 @@ class passwordGenerator(QtGui.QWidget):
 
 
     def saveSymbol(self):
+        print("@saveSymbol")
         if(select_symbol_window.lineEdit.text()!=""):
             symbolString = select_symbol_window.lineEdit.text()
             self.current_user.symbol = symbolString
@@ -423,9 +443,12 @@ class passwordGenerator(QtGui.QWidget):
             self.nextStep_event()
 
     def dialogClose(self):
+        print("@dialogClose")
         myDialog.close()
 
     def characterSelected(self):
+        print("@characterSelected")
+
         if(select_character_window.password_label.text()!="" and select_character_window.password_label.text()!= ""):
             pushedBy = self.sender().objectName()
             print("character selected")
@@ -464,10 +487,12 @@ class passwordGenerator(QtGui.QWidget):
             selectCharacterWindow2.show()
 
     def confirmcharacterpassword1(self):
+        print("@confirmcharacterpassword")
         if (select_character_window_2.lineEdit.text()==self.current_user.PAO1_full):
             self.nextStep_event()
 
     def buttonPressed(self):
+        print("@buttonPressed")
         name = self.sender().objectName()
         string  = keypad_window.number_le.text()
         if(name =="btn_1" ):
@@ -506,6 +531,7 @@ class passwordGenerator(QtGui.QWidget):
         keypad_window.number_le.setText(string)
 
     def buttonReleased(self):
+        print("@buttonReleased")
         keypad_window.btn_1.setStyleSheet("background:rgb(255, 255, 255)")
         keypad_window.btn_2.setStyleSheet("background:rgb(255, 255, 255)")
         keypad_window.btn_3.setStyleSheet("background:rgb(255, 255, 255)")
