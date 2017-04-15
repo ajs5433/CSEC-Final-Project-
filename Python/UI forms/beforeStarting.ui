@@ -96,7 +96,7 @@
     </font>
    </property>
    <property name="text">
-    <string>- You will be given SYMBOLS to memorize</string>
+    <string>- You will select your own SYMBOLS</string>
    </property>
    <property name="wordWrap">
     <bool>true</bool>
@@ -107,7 +107,7 @@
     <rect>
      <x>110</x>
      <y>220</y>
-     <width>491</width>
+     <width>551</width>
      <height>51</height>
     </rect>
    </property>
@@ -118,7 +118,7 @@
     </font>
    </property>
    <property name="text">
-    <string>- You will be given a SENTENCE with a famous character </string>
+    <string>- You will be given at least a SENTENCE with a famous character </string>
    </property>
    <property name="wordWrap">
     <bool>true</bool>

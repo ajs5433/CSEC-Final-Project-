@@ -519,7 +519,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Sometimes it is easier to remember a number when we relate them to a position. For this part, look at your keypad and type again your number.</string>
+    <string>Sometimes it is easier to remember a number when we relate them to a position. For this part, LOOK AT YOUR KEYBOARD and type again your number.</string>
    </property>
    <property name="wordWrap">
     <bool>true</bool>

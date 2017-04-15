@@ -131,7 +131,7 @@ class passwordGenerator(QtGui.QWidget):
         select_symbol_window.pushButton_2.clicked.connect(self.setupSymbolWindow)
 
     def openWindow(self):
-        backgroundWindow.show()
+        #backgroundWindow.show()
         random.shuffle(order_normal_mode)
         random.shuffle(order_medium_mode)
         order_normal_mode.insert(len(order_normal_mode), 'complete')
@@ -254,24 +254,30 @@ class passwordGenerator(QtGui.QWidget):
     def checkiftestispassed(self):
         pushedBy = self.sender().objectName()
 
-        if(routine_check.passwordCheck_le.text()== self.current_user.password):
+        if(str(routine_check.passwordCheck_le.text())== str(self.current_user.password)):
+            print ("TEST PASSED!! The password is '{}' and you put '{}'".format( str(self.current_user.password) , str(routine_check.passwordCheck_le.text())))
             self.dialogAttempts = 0
         else:
+            print("TEST NOT PASSED!! The password is '{}' and you put '{}'".format(str(self.current_user.password), str(routine_check.passwordCheck_le.text())))
             self.dialogAttempts = self.dialogAttempts+1
             dialogString = "That is not the current password! Include all the passwords up to this point\n you have a total of " + str(4-self.dialogAttempts)+ " attempts left."
             my_dialog.label.setText(dialogString)
             myDialog.show()
 
         if(self.dialogAttempts == 0):
+            print("here 3")
             routineCheck.close()
             routine_check.passwordCheck_le.setText("")
+            self.closeWindows()
             self.testPassed()
         elif(self.dialogAttempts == 4):
+            print("here 4")
             dialogString= "The password that we have on file is '"+ self.current_user.password+ "' remember it for next time."
             my_dialog.label.setText(dialogString)
             myDialog.show()
             self.dialogAttempts = 0
             routine_check.passwordCheck_le.setText("")
+            self.closeWindows()
             self.testPassed()
 
     def testPassed(self):

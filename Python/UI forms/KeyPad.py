@@ -261,7 +261,7 @@ class Ui_keyPad(object):
         self.btn_11.setText(_translate("keyPad", ".", None))
         self.btn_5.setText(_translate("keyPad", "5", None))
         self.btn_minus.setText(_translate("keyPad", "-", None))
-        self.label_2.setText(_translate("keyPad", "Sometimes it is easier to remember a number when we relate them to a position. For this part, look at your keypad and type again your number.", None))
+        self.label_2.setText(_translate("keyPad", "Sometimes it is easier to remember a number when we relate them to a position. For this part, LOOK AT YOUR KEYBOARD and type again your number.", None))
         self.next_btn.setText(_translate("keyPad", "Next", None))
         self.label_3.setText(_translate("keyPad", "Your number:", None))
 
