@@ -108,6 +108,7 @@ class createUser():
                 f.write(json.dumps(json_data))
 
     def addToPassword(self, moredata):
+        print("adding ", moredata, " to password")
         self.password = self.password + moredata
 
 if __name__== "__main__":

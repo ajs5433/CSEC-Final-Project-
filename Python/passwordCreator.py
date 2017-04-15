@@ -249,21 +249,31 @@ class passwordGenerator(QtGui.QWidget):
         selectSymbolWindow.close()
         createUserWindow.close()
 
+
     def nextStep_event(self):
         print("@nextStepEvent")
         self.closeWindows()
         pushedBy = self.sender().objectName()
         print("puched by {}".format(pushedBy))
         if (pushedBy != "Normal Passwords" and pushedBy != "Medium Passwords"):
+            routine_check.passwordCheck_le.setText("")
+            routine_check.widget.show()
+            routine_check.label.setText("CHECKPOINT!!\nWe would like to make sure you remember your whole password up to this point. What is your password again?")
             routine_check.ok_btn.clicked.connect(self.checkIfTestIsPassed)
             routine_check.ok_btn.setObjectName(pushedBy)
             routineCheck.show()
         else:
-            self.testPassed()
+            routine_check.widget.hide()
+            routine_check.label.setText("We will be testing your memory in each phase with CHECKPOINTS, so try to remember!!")
+            routine_check.ok_btn.clicked.connect(self.testPassed)
+            routine_check.ok_btn.setObjectName(pushedBy)
+            routineCheck.show()
+
 
     def checkIfTestIsPassed(self):
         print("@checkIfTestIsPassed")
         pushedBy = self.sender().objectName()
+        #routine_check.ok_btn.setObjectName(pushedBy)
         print("pushed by ", pushedBy)
 
         if(str(routine_check.passwordCheck_le.text())== str(self.current_user.password)):
@@ -272,27 +282,21 @@ class passwordGenerator(QtGui.QWidget):
         else:
             print("TEST NOT PASSED!! The password is '{}' and you put '{}'".format(str(self.current_user.password), str(routine_check.passwordCheck_le.text())))
             self.dialogAttempts = self.dialogAttempts+1
-            dialogString = "That is not the current password! Include all the passwords up to this point\n you have a total of " + str(4-self.dialogAttempts)+ " attempts left."
-            my_dialog.label.setText(dialogString)
-            myDialog.show()
+            routine_check.passwordCheck_le.setText("")
+            routine_check.label.setText("That is not the current password! Include all the passwords up to this point\n you have a total of " + str(3-self.dialogAttempts)+ " attempts left.")
+            #myDialog.show()
 
         if(self.dialogAttempts == 0):
-            print("here 3")
-            routineCheck.close()
-            routine_check.passwordCheck_le.setText("")
-            self.closeWindows()
-            self.testPassed()
-        elif(self.dialogAttempts == 4):
+            routine_check.ok_btn.clicked.connect(self.testPassed)
+            routine_check.label.setText("You passed the test!! press 'Ok' to continue")
+        elif(self.dialogAttempts == 3):
             print("here 4")
-            dialogString= "The password that we have on file is '"+ self.current_user.password+ "' remember it for next time."
-            my_dialog.label.setText(dialogString)
-            myDialog.show()
+            routine_check.label.setText("The password that we have on file is '"+ self.current_user.password+ "' remember it for the next time!")
+            routine_check.ok_btn.clicked.connect(self.testPassed)
             self.dialogAttempts = 0
-            routine_check.passwordCheck_le.setText("")
-            self.closeWindows()
-            self.testPassed()
 
     def testPassed(self):
+        routineCheck.close()
         print("@testPassed")
         pushedBy = self.sender().objectName()
 
@@ -342,6 +346,8 @@ class passwordGenerator(QtGui.QWidget):
             select_symbol_window.next_btn.clicked.connect(self.saveSymbol)
             selectSymbolWindow.show()
 
+            #We would like to make sure you remember your whole password up to this point. What is your password again?
+
     def confirmPasswordCreated_event(self):
         loginWindow.show()
 
@@ -368,7 +374,7 @@ class passwordGenerator(QtGui.QWidget):
                 "The value that you have is {} you are supposed to have {}".format(calculate_numbers.number2_le.text(),
                                                                                    str(self.current_user.number_2)))
         elif (str(calculate_numbers.results_le.text()) != str(self.current_user.number_result)):
-            print("The value that you have is {} you are supposed to have {}".format(calculate_numbers.results_le.text(),str(self.current_user.number_results)))
+            print("The value that you have is {} you are supposed to have {}".format(calculate_numbers.results_le.text(),str(self.current_user.number_result)))
 
         else:#(str(calculate_numbers.number1_le.text())==self.current_user.number_1 and\
               #         str(calculate_numbers.number2_le.text())==self.current_user.number_2 and\

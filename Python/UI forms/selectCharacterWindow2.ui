@@ -179,7 +179,7 @@
     </font>
    </property>
    <property name="text">
-    <string>So what is your PAO password so far?</string>
+    <string>So what is your sentence password?</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

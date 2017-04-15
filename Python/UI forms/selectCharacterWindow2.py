@@ -123,7 +123,7 @@ class Ui_characterSentenceWindow2(object):
         self.label_2.setText(_translate("characterSentenceWindow2", "+", None))
         self.label_3.setText(_translate("characterSentenceWindow2", "+", None))
         self.ok_btn.setText(_translate("characterSentenceWindow2", "Got it", None))
-        self.label.setText(_translate("characterSentenceWindow2", "So what is your PAO password so far?", None))
+        self.label.setText(_translate("characterSentenceWindow2", "So what is your sentence password?", None))
         self.label_4.setText(_translate("characterSentenceWindow2", "This is the resulting sentence of your password try to memorize it. Feel free to read it out loud while you type it.", None))
 
 
