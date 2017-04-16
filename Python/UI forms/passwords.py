@@ -35,6 +35,7 @@ order_medium_mode = ['PAO1', 'PAO2', 'Number', 'Symbol']
 app = QtGui.QApplication(sys.argv)
 
 #General Windows
+backgroundWindow = QtGui.QWidget()
 beforeStarting = QtGui.QWidget()
 calculateNumbers = QtGui.QWidget()
 #createUserWindow = QtGui.QWidget()
@@ -50,6 +51,7 @@ selectCharacterWindow = QtGui.QWidget()
 selectCharacterWindow2 = QtGui.QWidget()
 selectSymbolWindow = QtGui.QWidget()
 
+background_window = Ui_backgroundWindow()
 before_starting_window = Ui_beforeStarting()
 calculate_numbers = Ui_calculateNumbersWindow()
 #create_user_window = Ui_createUserWindow()
@@ -297,6 +299,7 @@ class passwordGenerator(QtGui.QWidget):
     def __init__(self):
         super(passwordGenerator, self).__init__()
 
+        background_window.setupUi(backgroundWindow)
         before_starting_window.setupUi(beforeStarting)
         calculate_numbers.setupUi(calculateNumbers)
         #create_user_window.setupUi(createUserWindow)
@@ -354,6 +357,7 @@ class passwordGenerator(QtGui.QWidget):
 
     def start(self):
         #Everything is set up let's show the windows
+        backgroundWindow.show()
         mainWindow.show()
         beforeStarting.show()
         sys.exit(app.exec_())
