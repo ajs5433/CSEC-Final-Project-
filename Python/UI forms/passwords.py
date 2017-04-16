@@ -94,6 +94,7 @@ class passwordGenerator(QtGui.QWidget):
             routine_check.label.setText("CHECKPOINT!!\nWe would like to make sure you remember your whole password up to this point. What is your password again?")
             routine_check.ok_btn.clicked.connect(self.checkIfTestIsPassed)
             #routine_check.ok_btn.setObjectName(pushedBy)
+            self.setupRC()
             routineCheck.show()
             # close previous windows
             selectCharacterWindow2.close()
@@ -111,6 +112,15 @@ class passwordGenerator(QtGui.QWidget):
             #routine_check.ok_btn.setObjectName(pushedBy)
             routineCheck.show()
             mainWindow.close()
+
+    def setupRC(self):
+        routineCheck = QtGui.QWidget()
+        routine_check = Ui_Dialog()
+        routine_check.setupUi(routineCheck)
+        routine_check.widget.show()
+        routine_check.passwordCheck_le.setText("")
+        routine_check.label.setText("CHECKPOINT!!\nWe would like to make sure you remember your whole password up to this point. What is your password again?")
+        routine_check.ok_btn.clicked.connect(self.checkIfTestIsPassed)
 
     # check test:*********************************************
     def checkIfTestIsPassed(self):
@@ -357,7 +367,7 @@ class passwordGenerator(QtGui.QWidget):
 
     def start(self):
         #Everything is set up let's show the windows
-        backgroundWindow.show()
+        #backgroundWindow.show()
         mainWindow.show()
         beforeStarting.show()
         sys.exit(app.exec_())
